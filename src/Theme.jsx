@@ -3,18 +3,19 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
-    PrimaryGreen: "#4db8bc",
-    DarkerGreen : "#459296",
+    primaryGreen: "#4db8bc",
+    darkerGreen : "#459296",
     backgroundBlack: "#010101",
     backgroundGray : "#222222",
     grey : "#333",
     lightBlue: "#AFDBD2",
+    lightGrey : "#999999",
     backgroundBlue : "#012169",
   },
   fonts: ["sans-serif", "Roboto"],
   fontSizes: {
     small: "1em",
-    medium: "2em",
+    medium: "1.5em",
     large: "3em"
   }
 };
