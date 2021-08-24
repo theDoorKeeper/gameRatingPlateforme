@@ -34,12 +34,14 @@ const NavButton = styled.li`
     }
 `
 
-function Header() {
+function Header(props) {
+    const {setloginOverlay} = props;
+
     return (
         <Wrapper>
             <h1>logo</h1>
         <Navbar>
-         <NavButton>
+         <NavButton onClick={()=>{setloginOverlay(true)}}>
           login  
         </NavButton>   
 
