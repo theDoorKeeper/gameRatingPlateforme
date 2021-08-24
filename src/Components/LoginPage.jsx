@@ -8,7 +8,7 @@ const FormWrapper = styled.div`
     display : flex;
     flex-direction : column;
     align-items : center ;
-    height : 50vh;
+    height : 55vh;
     width : 50vh;
     background-color  : ${props => props.theme.colors.backgroundGray};
     color : ${props => props.theme.colors.white};
@@ -36,7 +36,7 @@ function LoginPage(props) {
 
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
-    
+
     const handleClick = ()=>{
         setOverlayState(false);
         setSingUpOverlay(true);
