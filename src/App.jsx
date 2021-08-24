@@ -8,7 +8,7 @@ function App() {
 
   return (
     <Theme>
-      <Header/>
+      <Header setloginOverlay={setloginOverlay}/>
       <LoginPage overlayState={loginOverlay} setOverlayState={setloginOverlay}/>
     </Theme>
   );
