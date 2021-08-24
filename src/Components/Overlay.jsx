@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 
 const Wrapper = styled.div`
   position: fixed;
-  display: ${props => props.hidden ? "none" : "block" } ;
+  display: ${props => props.visible ? "none" : "block" } ;
   width: 100%;
   height: 100%;
   top: 0;
@@ -16,16 +16,18 @@ const Wrapper = styled.div`
   cursor: pointer;
 `
 
-function Overlay({children}) {
-    const [hidden, setHidden] = useState(false);
+function Overlay(props) {
+    const {visible, setVisible, children} = props;
+
 
     const handleClick = e =>{
         if (e.target === e.currentTarget ){
-            setHidden(true)
+            setVisible(true)
         }
     }
+
     return (
-        <Wrapper hidden={hidden} onClick={handleClick}>
+        <Wrapper visible={visible} onClick={handleClick}>
             {children}
         </Wrapper>
     )
