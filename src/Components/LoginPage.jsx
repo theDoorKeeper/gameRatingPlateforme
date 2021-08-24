@@ -25,12 +25,14 @@ const Bar = styled.span`
 
 `
 
-function LoginPage() {
+function LoginPage(props) {
+    const {overlayState, setOverlayState} = props;
+
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
     return (
-        <Overlay>
+        <Overlay visible={overlayState} setVisible={setOverlayState}>
          <FormWrapper>
              <h1>Log in</h1>
               <Input label={"E-mail"} setValue={setEmail} type={"email"}/>  
