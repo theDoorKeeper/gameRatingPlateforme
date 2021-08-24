@@ -24,12 +24,23 @@ const Bar = styled.span`
  border-bottom : 1px solid ${props=>props.theme.colors.backgroundBlack} ;
 
 `
+const SignUp = styled.h4`
+cursor : pointer;
+&:hover{
+    color : ${props => props.theme.colors.primaryGreen}
+}
+`
 
 function LoginPage(props) {
-    const {overlayState, setOverlayState} = props;
+    const {overlayState, setOverlayState, setSingUpOverlay} = props;
 
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    
+    const handleClick = ()=>{
+        setOverlayState(false);
+        setSingUpOverlay(true);
+    }
 
     return (
         <Overlay visible={overlayState} setVisible={setOverlayState}>
@@ -39,7 +50,7 @@ function LoginPage(props) {
               <Input label={"Password"} setValue={setPassword} type={"password"}/>  
               <Button name={"Log in"} type={"submit"}/>
                  <Bar/>
-                 or Sign Up
+                 don't have an Account? <SignUp onClick={handleClick}> Sign Up </SignUp> 
         </FormWrapper>   
       
         </Overlay>
