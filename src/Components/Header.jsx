@@ -32,6 +32,10 @@ const NavButton = styled.li`
     &:hover{
         color : ${props => props.theme.colors.primaryGreen}
     }
+    @media (max-width: 768px) {
+        font-size : ${props=>props.theme.fontSizes.small};
+  }
+
 `
 
 function Header(props) {
