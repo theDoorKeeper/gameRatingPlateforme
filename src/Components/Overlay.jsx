@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   position: fixed;
-  display: ${props => props.visible ? "none" : "block" } ;
+  display: ${props => props.visible ? "block" : "none" } ;
   width: 100%;
   height: 100%;
   top: 0;
@@ -22,7 +22,7 @@ function Overlay(props) {
 
     const handleClick = e =>{
         if (e.target === e.currentTarget ){
-            setVisible(true)
+            setVisible(false)
         }
     }
 
