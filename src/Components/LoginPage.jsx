@@ -37,7 +37,7 @@ function LoginPage(props) {
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const handleClick = ()=>{
+    const handleClick = () =>{
         setOverlayState(false);
         setSingUpOverlay(true);
     }
