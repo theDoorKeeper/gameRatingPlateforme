@@ -1,5 +1,5 @@
 export const fadeAway = (callback)=>{
-    setTimeout(()=>{
-        callback(false)
-    },1500)
-}
+	setTimeout(()=>{
+		callback(false);
+	},1500);
+};
