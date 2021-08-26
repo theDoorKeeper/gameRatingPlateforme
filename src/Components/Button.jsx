@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+/* eslint-disable react/prop-types */
+import React from 'react';
+import styled from 'styled-components';
 
 
 const StyledButton = styled.button`
@@ -14,16 +15,16 @@ const StyledButton = styled.button`
      color : ${props => props.theme.colors.primaryGreen};
     }
 
-`
+`;
 
 
 function Button(props) {
-    const {name, type, onClick} = props
-    return (
-        <StyledButton type={type} onClick={onClick}>
-            {name}
-        </StyledButton>
-    )
+	const {name, type, onClick} = props;
+	return (
+		<StyledButton type={type} onClick={onClick}>
+			{name}
+		</StyledButton>
+	);
 }
 
-export default Button
+export default Button;

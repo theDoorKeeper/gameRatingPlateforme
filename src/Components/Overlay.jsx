@@ -1,10 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
+/* eslint-disable react/prop-types */
+import React from 'react';
+import styled from 'styled-components';
 
 
 const Wrapper = styled.div`
   position: fixed;
-  display: ${props => props.visible ? "block" : "none" } ;
+  display: ${props => props.visible ? 'block' : 'none' } ;
   width: 100%;
   height: 100%;
   top: 0;
@@ -14,23 +15,23 @@ const Wrapper = styled.div`
   background-color: rgba(0,0,0,0.5);
   z-index: 2;
   cursor: pointer;
-`
+`;
 
 function Overlay(props) {
-    const {visible, setVisible, children} = props;
+	const {visible, setVisible, children} = props;
 
 
-    const handleClick = e =>{
-        if (e.target === e.currentTarget ){
-            setVisible(false)
-        }
-    }
+	const handleClick = e =>{
+		if (e.target === e.currentTarget ){
+			setVisible(false);
+		}
+	};
 
-    return (
-        <Wrapper visible={visible} onClick={handleClick}>
-            {children}
-        </Wrapper>
-    )
+	return (
+		<Wrapper visible={visible} onClick={handleClick}>
+			{children}
+		</Wrapper>
+	);
 }
 
-export default Overlay
+export default Overlay;

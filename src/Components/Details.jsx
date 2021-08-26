@@ -1,6 +1,6 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
-import backgroundImg from '../assets/gameBackground.png'
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import backgroundImg from '../assets/gameBackground.png';
 
 const BackGround = styled.div`
     background-size: 100% auto ;
@@ -17,13 +17,13 @@ const BackGround = styled.div`
         height : 60vh;
         width :100%;
   }
-`
+`;
 const floating = keyframes`
     from { transform: translate(0,  0px); }
     65%  { transform: translate(0, 15px); }
     to   { transform: translate(0, -0px); }    
 
-`
+`;
 
 const Description = styled.div`
     width : 80%;
@@ -44,15 +44,15 @@ const Description = styled.div`
         margin-top : 0.5rem;
   }
 
-`
+`;
 
 function Details() {
-    return (
-        <>
-            <BackGround/>
-            <Description>Rate your games and share your reviews with your friends !</Description>    
-        </>
-    )
+	return (
+		<>
+			<BackGround/>
+			<Description>Rate your games and share your reviews with your friends !</Description>    
+		</>
+	);
 }
 
-export default Details
+export default Details;

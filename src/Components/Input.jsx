@@ -1,5 +1,6 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+/* eslint-disable react/prop-types */
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const Wrapper = styled.div`
   position:relative; 
@@ -8,11 +9,11 @@ const Wrapper = styled.div`
   height: 3vh;
   display : flex;
   flex-direction: column;
-`
+`;
 const inputHighlighter = keyframes`
  from { background:${props => props.theme.colors.primaryGreen}; }
   to  { width:0; background:transparent; }
-`
+`;
 
 
 const StyledInput = styled.input`
@@ -39,7 +40,7 @@ const StyledInput = styled.input`
       &:focus ~ .highlight{
         animation:${inputHighlighter} 0.3s ease;
       }
-`
+`;
 const StyledLabel = styled.label`
   color:#999; 
   font-size:18px;
@@ -52,7 +53,7 @@ const StyledLabel = styled.label`
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
 
-`
+`;
 
 
 const Bar = styled.span`
@@ -78,7 +79,7 @@ const Bar = styled.span`
     right:50%;
 }
 
-`
+`;
 
 const Highlight = styled.span`
   position:absolute;
@@ -88,28 +89,28 @@ const Highlight = styled.span`
   left:0;
   pointer-events:none;
   opacity:0.5;
-`
+`;
 
 
 
 
 
 function Input(props) {
- const {type, label, setValue} = props;
+	const {type, label, setValue} = props;
 
- const onChange = (e) => {
-  setValue(e.target.value);
-};
+	const onChange = (e) => {
+		setValue(e.target.value);
+	};
 
 
-    return (
-        <Wrapper>  
-        <StyledInput type={type} required onChange={onChange} />
-        <Highlight className="highlight"/>
-        <Bar className="bar"/>
-        <StyledLabel>{label}</StyledLabel>
-        </Wrapper>
-    )
+	return (
+		<Wrapper>  
+			<StyledInput type={type} required onChange={onChange} />
+			<Highlight className="highlight"/>
+			<Bar className="bar"/>
+			<StyledLabel>{label}</StyledLabel>
+		</Wrapper>
+	);
 }
 
-export default Input
+export default Input;

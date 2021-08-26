@@ -1,5 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
+/* eslint-disable react/prop-types */
+import React from 'react';
+import styled from 'styled-components';
 
 
 const Wrapper = styled.div`
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
     height : 10vh;
     max-width : 100%;
     align-items : center ;
-`
+`;
 
 const Navbar = styled.ul`
     margin-top : 0;
@@ -23,7 +24,7 @@ const Navbar = styled.ul`
     justify-content : space-between ;
     align-items : center ;
 
-`
+`;
 
 const NavButton = styled.li`
     color : ${props => props.theme.colors.lightGrey};
@@ -36,33 +37,33 @@ const NavButton = styled.li`
         font-size : ${props=>props.theme.fontSizes.small};
   }
 
-`
+`;
 
 function Header(props) {
-    const {setloginOverlay} = props;
+	const {setloginOverlay} = props;
 
-    return (
-        <Wrapper>
-            <h1>logo</h1>
-        <Navbar>
-         <NavButton onClick={()=>{setloginOverlay(true)}}>
+	return (
+		<Wrapper>
+			<h1>logo</h1>
+			<Navbar>
+				<NavButton onClick={()=>{setloginOverlay(true);}}>
           login  
-        </NavButton>   
+				</NavButton>   
 
-        <NavButton>
+				<NavButton>
           games 
-        </NavButton>   
+				</NavButton>   
 
-        <NavButton>
+				<NavButton>
           people
-        </NavButton>   
+				</NavButton>   
 
-        <NavButton>
+				<NavButton>
          search {/* <input/>  */}
-        </NavButton>   
-        </Navbar>
-        </Wrapper>
-    )
+				</NavButton>   
+			</Navbar>
+		</Wrapper>
+	);
 }
 
-export default Header
+export default Header;
