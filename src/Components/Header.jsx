@@ -42,15 +42,15 @@ const NavButton = styled.li`
 
 function Header(props) {
 	const {setloginOverlay} = props;
-	const {curentUser} = useAuth();
+	const {currentUser} = useAuth();
     
 	return (
 		<Wrapper>
 			<h1>logo</h1>
 			<Navbar>
-				<NavButton onClick={()=>{setloginOverlay(true);}}>
+				{!currentUser ?	<NavButton onClick={()=>{setloginOverlay(true);}}>
           login  
-				</NavButton>   
+				</NavButton> : null }
 
 				<NavButton>
           games 
@@ -61,7 +61,7 @@ function Header(props) {
 				</NavButton>   
 
 				<NavButton>
-         search {/* <input/>  */}
+         search
 				</NavButton>   
 			</Navbar>
 		</Wrapper>
