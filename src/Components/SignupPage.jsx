@@ -39,6 +39,7 @@ function SignUpPage(props) {
     const [repeatPassword, setRepeatPassword] = useState(null);
     const [name, setName] = useState(null);
     const [errorMsg, setErrorMsg] = useState('');
+    const [error, setError] = useState(false);
 
     const handleClick = ()=>{   
         setOverlayState(false);
