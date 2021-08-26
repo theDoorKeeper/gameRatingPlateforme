@@ -38,7 +38,7 @@ function SignUpPage(props) {
     const [password, setPassword] = useState(null);
     const [repeatPassword, setRepeatPassword] = useState(null);
     const [name, setName] = useState(null);
-    const [error, setError] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
 
     const handleClick = ()=>{   
         setOverlayState(false);
@@ -46,7 +46,7 @@ function SignUpPage(props) {
     }
     const submitClick = ()=>{
         if(password!==repeatPassword){
-            setError("passwords dont match");
+            setErrorMsg("passwords dont match");
             return 
         }
 
