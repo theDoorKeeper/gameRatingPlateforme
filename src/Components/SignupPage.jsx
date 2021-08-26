@@ -66,11 +66,13 @@ function SignUpPage(props) {
 		}
 
 		try {
+			setLoading(true);
 			await signUp(email, password, name);
 			setEmail(null);
 			setPassword(null);
 			setRepeatPassword(null);
 			setName(null);
+			setLoading(false);
 		}
 		catch(e) {
 			handleErrors(e.message);
