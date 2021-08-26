@@ -4,6 +4,7 @@ import { fadeAway } from '../helperFunctions/helper'
 import Button from './Button'
 import Input from './Input'
 import Overlay from './Overlay'
+import Popup from './PopUp'
 
 const FormWrapper = styled.div`
     display : flex;
@@ -70,6 +71,7 @@ function SignUpPage(props) {
         <Overlay visible={overlayState} setVisible={setOverlayState}>
          <FormWrapper>
              <h1>Sign up</h1>
+             <Popup error={error} errorMsg={errorMsg}/>
               <Input label={"Name"} setValue={setName} type={"text"}/>  
               <Input label={"E-mail"} setValue={setEmail} type={"email"}/>  
               <Input label={"Password"} setValue={setPassword} type={"password"}/>  
