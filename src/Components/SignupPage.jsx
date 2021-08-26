@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { fadeAway } from '../helperFunctions/helper';
@@ -37,6 +38,7 @@ cursor : pointer;
 
 function SignUpPage(props) {
 	const {overlayState, setOverlayState, setloginOverlay} = props;
+	const {signUp} = getAuth();
 
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -56,17 +58,23 @@ function SignUpPage(props) {
 		fadeAway(setError);
 	};
 
-	const submitClick = ()=>{
+	const submitClick = async ()=>{
 		if(password!==repeatPassword){
 			handleErrors('Passwords dont match !');
 			return; 
 		}
 
-
-		setEmail(null);
-		setPassword(null);
-		setRepeatPassword(null);
-		setName(null);
+		try {
+			await signUp(email, password, name);
+			setEmail(null);
+			setPassword(null);
+			setRepeatPassword(null);
+			setName(null);
+		}
+		catch(e) {
+			handleErrors(e.message);
+		}
+	
 
         
 	};
