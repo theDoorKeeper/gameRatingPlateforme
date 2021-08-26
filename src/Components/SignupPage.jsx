@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { fadeAway } from '../helperFunctions/helper';
 import { useAuth } from './AuthProvider';
@@ -38,7 +38,7 @@ cursor : pointer;
 
 function SignUpPage(props) {
 	const {overlayState, setOverlayState, setloginOverlay} = props;
-	const {signUp} = useAuth();
+	const {signUp, signUpError} = useAuth();
 
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -68,19 +68,17 @@ function SignUpPage(props) {
 		try {
 			setLoading(true);
 			await signUp(email, password, name);
-			setEmail(null);
-			setPassword(null);
-			setRepeatPassword(null);
-			setName(null);
 			setLoading(false);
 		}
 		catch(e) {
 			handleErrors(e.message);
 		}
-	
-
         
 	};
+    
+	useEffect(() => {
+		handleErrors(signUpError);
+	}, [signUpError]);
 
 	return (
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
