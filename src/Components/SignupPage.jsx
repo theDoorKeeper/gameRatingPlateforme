@@ -46,6 +46,7 @@ function SignUpPage(props) {
 	const [name, setName] = useState(null);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [error, setError] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const handleClick = ()=>{   
 		setOverlayState(false);
