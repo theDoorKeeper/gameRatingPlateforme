@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { useAuth } from './AuthProvider';
 
 
 const Wrapper = styled.div`
@@ -41,7 +42,8 @@ const NavButton = styled.li`
 
 function Header(props) {
 	const {setloginOverlay} = props;
-
+	const {curentUser} = useAuth();
+    
 	return (
 		<Wrapper>
 			<h1>logo</h1>
