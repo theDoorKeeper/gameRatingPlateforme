@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { fadeAway } from '../helperFunctions/helper';
+import { useAuth } from './AuthProvider';
 import Button from './Button';
 import Input from './Input';
 import Overlay from './Overlay';
@@ -38,7 +38,7 @@ cursor : pointer;
 
 function SignUpPage(props) {
 	const {overlayState, setOverlayState, setloginOverlay} = props;
-	const {signUp} = getAuth();
+	const {signUp} = useAuth();
 
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
