@@ -91,7 +91,7 @@ function SignUpPage(props) {
 				<Input label={'E-mail'} setValue={setEmail} type={'email'}/>  
 				<Input label={'Password'} setValue={setPassword} type={'password'}/>  
 				<Input label={'Repeat Password'} setValue={setRepeatPassword} type={'password'}/> 
-				<Button name={'Sign Up'} type={'submit'} onClick={submitClick}/>
+				<Button name={'Sign Up'} type={'submit'} onClick={submitClick} disabled={loading} />
 				<Bar/>
                  Already have an account? <Login onClick={handleClick}> Login </Login> 
 			</FormWrapper>   
