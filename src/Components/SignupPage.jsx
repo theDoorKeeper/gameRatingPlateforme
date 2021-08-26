@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { fadeAway } from '../helperFunctions/helper'
 import Button from './Button'
 import Input from './Input'
 import Overlay from './Overlay'
@@ -45,9 +46,15 @@ function SignUpPage(props) {
         setOverlayState(false);
         setloginOverlay(true);
     }
+
+    const handleErrors = (errormsg)=>{
+            setErrorMsg(errormsg);
+            setError(true);
+            fadeAway(setError);
+    }
+
     const submitClick = ()=>{
         if(password!==repeatPassword){
-            setErrorMsg("passwords dont match");
             return 
         }
 
