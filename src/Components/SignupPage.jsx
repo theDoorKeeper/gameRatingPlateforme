@@ -38,7 +38,7 @@ cursor : pointer;
 
 function SignUpPage(props) {
 	const {overlayState, setOverlayState, setloginOverlay} = props;
-	const {signUp, signUpError} = useAuth();
+	const {signUp, signUpError, currentUser} = useAuth();
 
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -69,6 +69,7 @@ function SignUpPage(props) {
 			setLoading(true);
 			await signUp(email, password, name);
 			setLoading(false);
+		
 		}
 		catch(e) {
 			handleErrors(e.message);
@@ -79,6 +80,12 @@ function SignUpPage(props) {
 	useEffect(() => {
 		handleErrors(signUpError);
 	}, [signUpError]);
+
+	useEffect(() => {
+		if(currentUser){
+			setOverlayState(false);
+		}
+	}, [currentUser]);
 
 	return (
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
