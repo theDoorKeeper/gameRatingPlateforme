@@ -38,12 +38,25 @@ function SignUpPage(props) {
     const [password, setPassword] = useState(null);
     const [repeatPassword, setRepeatPassword] = useState(null);
     const [name, setName] = useState(null);
+    const [error, setError] = useState('');
 
     const handleClick = ()=>{   
         setOverlayState(false);
         setloginOverlay(true);
     }
+    const submitClick = ()=>{
+        if(password!==repeatPassword){
+            setError("passwords dont match");
+            return 
+        }
 
+          setEmail(null);
+          setPassword(null);
+          setRepeatPassword(null);
+          setName(null);
+
+        
+    }
 
     return (
         <Overlay visible={overlayState} setVisible={setOverlayState}>
@@ -53,7 +66,7 @@ function SignUpPage(props) {
               <Input label={"E-mail"} setValue={setEmail} type={"email"}/>  
               <Input label={"Password"} setValue={setPassword} type={"password"}/>  
               <Input label={"Repeat Password"} setValue={setRepeatPassword} type={"password"}/> 
-              <Button name={"Sign Up"} type={"submit"}/>
+              <Button name={"Sign Up"} type={"submit"} onClick={submitClick}/>
                  <Bar/>
                  Already have an account? <Login onClick={handleClick}> Login </Login> 
         </FormWrapper>   
