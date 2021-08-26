@@ -56,6 +56,7 @@ function SignUpPage(props) {
 
     const submitClick = ()=>{
         if(password!==repeatPassword){
+            handleErrors("Passwords dont match !")
             return 
         }
 
