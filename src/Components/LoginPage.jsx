@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useAuth } from './AuthProvider';
 import Button from './Button';
 import Input from './Input';
 import Overlay from './Overlay';
@@ -35,7 +36,8 @@ cursor : pointer;
 
 function LoginPage(props) {
 	const {overlayState, setOverlayState, setSingUpOverlay} = props;
-
+	const {login, currentUser} = useAuth();
+	
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 
