@@ -16,7 +16,8 @@ export function AuthProvider({children}) {
 	const [currentUser, setcurrentUser] = useState();
 	const [loading, setloading] = useState(true);
 	const [signUpError, setSignUpError] = useState('');
-
+	const [loginError, setLoginError] = useState('');
+	
 	const createUserDoc = async (id,name)=>{
 		try {
 			await setDoc(doc(db, 'users', id), {
@@ -49,8 +50,8 @@ export function AuthProvider({children}) {
 			// ...
 			})
 			.catch((error) => {
-				const errorCode = error.code;
 				const errorMessage = error.message; 
+				setLoginError(errorMessage);
 			});
 	};		
 
@@ -75,6 +76,7 @@ export function AuthProvider({children}) {
 		signUp,
 		signUpError,
 		login,
+		loginError,
 		logout
 	};
 	return (
