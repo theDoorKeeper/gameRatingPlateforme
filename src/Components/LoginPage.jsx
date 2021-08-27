@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { fadeAway } from '../helperFunctions/helper';
 import { useAuth } from './AuthProvider';
@@ -55,6 +55,12 @@ function LoginPage(props) {
 		setError(true);
 		fadeAway(setError);
 	};
+
+	useEffect(() => {
+		if(currentUser){
+			setOverlayState(false);
+		}
+	}, [currentUser]);
 
 	return (
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
