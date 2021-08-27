@@ -45,7 +45,7 @@ function LoginPage(props) {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
-	
+
 	const handleClick = () =>{
 		setOverlayState(false);
 		setSingUpOverlay(true);
@@ -56,6 +56,20 @@ function LoginPage(props) {
 		setError(true);
 		fadeAway(setError);
 	};
+
+	const submitClick = async ()=>{
+		try {
+			setLoading(true);
+			await login(email, password);
+			setLoading(false);
+		
+		}
+		catch(e) {
+			handleErrors(e.message);
+		}
+        
+	};
+    
 
 	useEffect(() => {
 		if(currentUser){
