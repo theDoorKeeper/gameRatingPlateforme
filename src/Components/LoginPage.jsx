@@ -7,6 +7,7 @@ import { useAuth } from './AuthProvider';
 import Button from './Button';
 import Input from './Input';
 import Overlay from './Overlay';
+import Popup from './PopUp';
 
 const FormWrapper = styled.div`
     display : flex;
@@ -54,11 +55,12 @@ function LoginPage(props) {
 		setError(true);
 		fadeAway(setError);
 	};
-	
+
 	return (
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
 			<FormWrapper>
 				<h1>Log in</h1>
+				<Popup error={error} errorMsg={errorMsg}/>
 				<Input label={'E-mail'} setValue={setEmail} type={'email'}/>  
 				<Input label={'Password'} setValue={setPassword} type={'password'}/>  
 				<Button name={'Log in'} type={'submit'}/>
