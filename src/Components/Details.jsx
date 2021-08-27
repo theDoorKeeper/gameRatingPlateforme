@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import backgroundImg from '../assets/gameBackground.png';
+import SignUpPage from './SignupPage';
+import LoginPage from './LoginPage';
 
 const BackGround = styled.div`
     background-size: 100% auto ;
@@ -46,9 +49,13 @@ const Description = styled.div`
 
 `;
 
-function Details() {
+function Details(props) {
+	const {loginOverlay, setloginOverlay, singUpOverlay, setSingUpOverlay} = props;
+
 	return (
 		<>
+			<LoginPage overlayState={loginOverlay} setOverlayState={setloginOverlay} setSingUpOverlay={setSingUpOverlay}/>
+			<SignUpPage overlayState={singUpOverlay} setOverlayState={setSingUpOverlay} setloginOverlay={setloginOverlay}/>
 			<BackGround/>
 			<Description>Rate your games and share your reviews with your friends !</Description>    
 		</>
