@@ -14,14 +14,22 @@ const StyledButton = styled.button`
      border : 1px solid ${props => props.theme.colors.primaryGreen};
      color : ${props => props.theme.colors.primaryGreen};
     }
+    &:disabled{
+        color : ${props => props.theme.colors.lightGrey};
+        background : ${props => props.theme.colors.backgroundGray};
+        &:hover{
+     border : none;
+     color : ${props => props.theme.colors.lightGrey};
+    }
+    }
 
 `;
 
 
 function Button(props) {
-	const {name, type, onClick} = props;
+	const {name, type, onClick,disabled} = props;
 	return (
-		<StyledButton type={type} onClick={onClick}>
+		<StyledButton type={type} onClick={onClick} disabled={disabled}>
 			{name}
 		</StyledButton>
 	);
