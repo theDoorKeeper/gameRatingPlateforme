@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { fadeAway } from '../helperFunctions/helper';
 import { useAuth } from './AuthProvider';
 import Button from './Button';
 import Input from './Input';
@@ -42,12 +43,18 @@ function LoginPage(props) {
 	const [password, setPassword] = useState(null);
 	const [errorMsg, setErrorMsg] = useState('');
 	const [error, setError] = useState(false);
-	
+
 	const handleClick = () =>{
 		setOverlayState(false);
 		setSingUpOverlay(true);
 	};
 
+	const handleErrors = (errormsg)=>{
+		setErrorMsg(errormsg);
+		setError(true);
+		fadeAway(setError);
+	};
+	
 	return (
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
 			<FormWrapper>
