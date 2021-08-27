@@ -43,9 +43,16 @@ export function AuthProvider({children}) {
 
 
 	const login = (email, password )=>{
-		signInWithEmailAndPassword(auth, email, password);
-	};
-
+		signInWithEmailAndPassword(auth, email, password)
+			.then(() => {
+			// Signed in 
+			// ...
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message; 
+			});
+	};		
 
 
 	const logout = ()=>{
