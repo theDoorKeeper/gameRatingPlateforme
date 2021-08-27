@@ -69,7 +69,10 @@ function LoginPage(props) {
 		}
         
 	};
-    
+
+	useEffect(() => {
+		handleErrors(loginError);
+	}, [loginError]);
 
 	useEffect(() => {
 		if(currentUser){
