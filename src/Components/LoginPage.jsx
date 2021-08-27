@@ -38,7 +38,7 @@ cursor : pointer;
 
 function LoginPage(props) {
 	const {overlayState, setOverlayState, setSingUpOverlay} = props;
-	const {login, currentUser} = useAuth();
+	const {login, loginError, currentUser} = useAuth();
 	
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -84,7 +84,7 @@ function LoginPage(props) {
 				<Popup error={error} errorMsg={errorMsg}/>
 				<Input label={'E-mail'} setValue={setEmail} type={'email'}/>  
 				<Input label={'Password'} setValue={setPassword} type={'password'}/>  
-				<Button name={'Log in'} type={'submit'}/>
+				<Button name={'Log in'} type={'submit'} onClick={submitClick} disabled={loading} />
 				<Bar/>
                  dont have an Account? <SignUp onClick={handleClick}> Sign Up </SignUp> 
 			</FormWrapper>   
