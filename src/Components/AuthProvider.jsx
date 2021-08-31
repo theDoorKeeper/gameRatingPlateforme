@@ -57,7 +57,15 @@ export function AuthProvider({children}) {
 
 
 	const logout = ()=>{
-		signOut(auth);
+		signOut(auth)
+			.then(() => {
+			// Signed in 
+			// ...
+			})
+			.catch((error) => {
+				const errorMessage = error.message; 
+				setLoginError(errorMessage);
+			});
 	};
 
       
