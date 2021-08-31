@@ -65,6 +65,7 @@ export function AuthProvider({children}) {
 			})
 			.catch((error) => {
 				const errorMessage = error.message; 
+				setlogoutError(errorMessage);
 			});
 	};
 
