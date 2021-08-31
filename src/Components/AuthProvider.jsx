@@ -17,7 +17,8 @@ export function AuthProvider({children}) {
 	const [loading, setloading] = useState(true);
 	const [signUpError, setSignUpError] = useState('');
 	const [loginError, setLoginError] = useState('');
-	
+	const [logoutError, setlogoutError] = useState('');
+
 	const createUserDoc = async (id,name)=>{
 		try {
 			await setDoc(doc(db, 'users', id), {
@@ -64,7 +65,6 @@ export function AuthProvider({children}) {
 			})
 			.catch((error) => {
 				const errorMessage = error.message; 
-				setLoginError(errorMessage);
 			});
 	};
 
@@ -85,7 +85,8 @@ export function AuthProvider({children}) {
 		signUpError,
 		login,
 		loginError,
-		logout
+		logout,
+		logoutError
 	};
 	return (
 		<AuthContext.Provider value={value}>
