@@ -4,6 +4,7 @@ import Header from './Components/Header';
 import Details from './Components/Details';
 import Theme from './Components/Theme';
 import { AuthProvider } from './Components/AuthProvider';
+import { Route, Router, Switch } from 'react-router';
 
 function App() {
 	const [loginOverlay, setloginOverlay] = useState(false);
@@ -14,8 +15,14 @@ function App() {
 		<Theme>
 			<AuthProvider> 
 				<Header setloginOverlay={setloginOverlay}/>
-				<Details loginOverlay={loginOverlay}  setloginOverlay={setloginOverlay}
-					singUpOverlay={singUpOverlay}  setSingUpOverlay={setSingUpOverlay} />
+				<Router>
+					<Switch>
+						<Route exact path="/">
+							<Details loginOverlay={loginOverlay}  setloginOverlay={setloginOverlay}
+								singUpOverlay={singUpOverlay}  setSingUpOverlay={setSingUpOverlay} />
+						</Route>
+					</Switch>
+				</Router>
 			</AuthProvider>
 		</Theme>
 	);
