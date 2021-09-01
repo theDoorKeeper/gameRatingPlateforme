@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { fadeAway } from '../helperFunctions/helper';
 import { useAuth } from './AuthProvider';
 import Button from './Button';
 import Input from './Input';
@@ -54,9 +53,8 @@ function SignUpPage(props) {
 	};
 
 	const handleErrors = (errormsg)=>{
-		setErrorMsg(errormsg);
 		setError(true);
-		fadeAway(setError);
+		setErrorMsg(errormsg);
 	};
 
 	const submitClick = async ()=>{
@@ -69,7 +67,7 @@ function SignUpPage(props) {
 			setLoading(true);
 			await signUp(email, password, name);
 			setLoading(false);
-		
+	
 		}
 		catch(e) {
 			handleErrors(e.message);
@@ -79,7 +77,7 @@ function SignUpPage(props) {
     
 	useEffect(() => {
 		handleErrors(signUpError);
-	}, [signUpError]);
+	}, [signUpError]); 
 
 	useEffect(() => {
 		if(currentUser){
@@ -91,7 +89,7 @@ function SignUpPage(props) {
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
 			<FormWrapper>
 				<h1>Sign up</h1>
-				<Popup error={error} errorMsg={errorMsg}/>
+				<Popup error={error} errorMsg={errorMsg} setError={setError}/>
 				<Input label={'Name'} setValue={setName} type={'text'}/>  
 				<Input label={'E-mail'} setValue={setEmail} type={'email'}/>  
 				<Input label={'Password'} setValue={setPassword} type={'password'}/>  

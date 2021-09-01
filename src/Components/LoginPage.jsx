@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { fadeAway } from '../helperFunctions/helper';
 import { useAuth } from './AuthProvider';
 import Button from './Button';
 import Input from './Input';
@@ -54,7 +53,6 @@ function LoginPage(props) {
 	const handleErrors = (errormsg)=>{
 		setErrorMsg(errormsg);
 		setError(true);
-		fadeAway(setError);
 	};
 
 	const submitClick = async ()=>{
@@ -84,7 +82,7 @@ function LoginPage(props) {
 		<Overlay visible={overlayState} setVisible={setOverlayState}>
 			<FormWrapper>
 				<h1>Log in</h1>
-				<Popup error={error} errorMsg={errorMsg}/>
+				<Popup error={error} errorMsg={errorMsg} setError={setError}/>
 				<Input label={'E-mail'} setValue={setEmail} type={'email'}/>  
 				<Input label={'Password'} setValue={setPassword} type={'password'}/>  
 				<Button name={'Log in'} type={'submit'} onClick={submitClick} disabled={loading} />
