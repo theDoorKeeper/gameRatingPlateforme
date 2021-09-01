@@ -1,30 +1,46 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import Details from './Components/Details';
 import Theme from './Components/Theme';
-import { AuthProvider } from './Components/AuthProvider';
-import { Route, Router, Switch } from 'react-router';
+import { AuthProvider, useAuth } from './Components/AuthProvider';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from 'react-router-dom';
+import Profile from './Components/Profile';
+import PrivateRoute from './Components/PrivateRoute';
+import LoginPage from './Components/LoginPage';
+import SignUpPage from './Components/SignupPage';
 
 function App() {
 	const [loginOverlay, setloginOverlay] = useState(false);
 	const [singUpOverlay, setSingUpOverlay] = useState(false);
+	
+	const {currentUser} = useAuth();
 
+	useEffect(() => {
+		console.log(currentUser);
+	}, [currentUser]);
 	return (
-    
-		<Theme>
-			<AuthProvider> 
-				<Header setloginOverlay={setloginOverlay}/>
-				<Router>
+		<Router>
+
+			<Theme>
+				<AuthProvider> 
+					<Header setloginOverlay={setloginOverlay}/>			
 					<Switch>
 						<Route exact path="/">
-							<Details loginOverlay={loginOverlay}  setloginOverlay={setloginOverlay}
-								singUpOverlay={singUpOverlay}  setSingUpOverlay={setSingUpOverlay} />
+							<Details/>
+							{!currentUser ? <> <LoginPage overlayState={loginOverlay} setOverlayState={setloginOverlay} setSingUpOverlay={setSingUpOverlay}/>
+								<SignUpPage overlayState={singUpOverlay} setOverlayState={setSingUpOverlay} setloginOverlay={setloginOverlay}/> </> : null}
 						</Route>
+						<PrivateRoute  path="/user" component={Profile}/>
 					</Switch>
-				</Router>
-			</AuthProvider>
-		</Theme>
+				</AuthProvider>
+			</Theme>
+
+		</Router>
 	);
 }
 
