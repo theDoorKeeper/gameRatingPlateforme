@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 
@@ -37,7 +37,17 @@ const Pop = styled.div.attrs(props => ({
   `; 
 
 function Popup(props) {
-	const { errorMsg, error } = props;
+	const { errorMsg, error,  setError } = props;
+
+	useEffect(() => {
+		if(error){
+			setTimeout(()=>setError(false),1500);
+		}
+		return  function cleanup() {
+			clearTimeout(setTimeout(setError(false),1500));
+		};
+	}, [error]); 
+  
 	return (
 		<Pop error={error} errorMsg={errorMsg}>
 			{errorMsg}
