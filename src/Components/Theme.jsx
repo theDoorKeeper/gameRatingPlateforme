@@ -13,6 +13,7 @@ const theme = {
 		lightGrey : '#999999',
 		backgroundBlue : '#012169',
 		white : '#ffffff',
+		transparentWhite : '#ffffffab',
 	},
 	fonts: ['sans-serif', 'Roboto'],
 	fontSizes: {
