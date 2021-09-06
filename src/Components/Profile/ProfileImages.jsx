@@ -19,7 +19,11 @@ const Wrapper = styled.div`
 const ProfilePicture = styled.img`
 	width : 250px;
 	height : 250px;
-	border : 3px solid ${props => props.theme.colors.primaryGreen};
+	border : 3px solid transparent;
+	&:hover{
+		border : 3px solid ${props => props.theme.colors.primaryGreen};
+		cursor : pointer;
+	}
 `;
 
 const ProfileName = styled.div`
