@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Bio from './Bio';
+import Navbar from './Navbar';
 
 const Container = styled.div`
 	  width : 100%;
@@ -17,6 +19,7 @@ const NavbarContainer = styled.div`
 	color : white;
 	font-size : ${props => props.theme.fontSizes.small};
 	background-color : ${props => props.theme.colors.backgroundGray};
+	padding-left: 50%;
 `;
 
 const Content = styled.div`
@@ -28,8 +31,12 @@ function ProfileDetails() {
 	return (
 		<>
 			<Container>
-				<NavbarContainer/>
-				<Content/>
+				<NavbarContainer>
+					<Navbar/>
+				</NavbarContainer>
+				<Content>
+					<Bio/>
+				</Content>
 			</Container>
 		</>
 	);
