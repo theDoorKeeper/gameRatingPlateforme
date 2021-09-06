@@ -20,7 +20,7 @@ const ProfilePicture = styled.div`
 	width : 100%;
 	height : 15rem;
 	background-color : white;
-	background-image : ${props => props.profilePicture};
+	background : url(${props=> props.image}) no-repeat center center fixed;
 	border : 3px solid ${props => props.theme.colors.primaryGreen};
 `;
 
@@ -42,7 +42,8 @@ const CoverPicture = styled.div`
 	width : 100%;
 	height : 50%;
 	background-color : blue;
-    background-image : ${props=> props.image};
+	background : url(${props=> props.image}) no-repeat center center fixed;
+	background-size : cover;
 `;
 
 
@@ -52,7 +53,7 @@ function ProfileImages(props) {
 	return (
 		<CoverPicture image = {coverImage}> 
 			<Wrapper>
-				<ProfilePicture image={profileImage}/>
+				<ProfilePicture image = {profileImage}/>
 				<ProfileName>{name}</ProfileName>
 				<ProfileDate>member since : {creationDate}</ProfileDate>
 			</Wrapper>
