@@ -16,11 +16,9 @@ const Wrapper = styled.div`
 	z-index : 2;
 `;
 
-const ProfilePicture = styled.div`
-	width : 100%;
-	height : 15rem;
-	background-color : white;
-	background : url(${props=> props.image}) no-repeat center center fixed;
+const ProfilePicture = styled.img`
+	width : 250px;
+	height : 250px;
 	border : 3px solid ${props => props.theme.colors.primaryGreen};
 `;
 
@@ -41,8 +39,9 @@ const ProfileDate = styled.div`
 const CoverPicture = styled.div`
 	width : 100%;
 	height : 50%;
-	background-color : blue;
 	background : url(${props=> props.image}) no-repeat center center fixed;
+	background-color : blue;
+	filter : 8px;
 	background-size : cover;
 `;
 
@@ -53,7 +52,7 @@ function ProfileImages(props) {
 	return (
 		<CoverPicture image = {coverImage}> 
 			<Wrapper>
-				<ProfilePicture image = {profileImage}/>
+				<ProfilePicture src = {profileImage}/>
 				<ProfileName>{name}</ProfileName>
 				<ProfileDate>member since : {creationDate}</ProfileDate>
 			</Wrapper>
