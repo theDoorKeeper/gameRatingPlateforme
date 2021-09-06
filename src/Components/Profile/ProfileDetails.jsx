@@ -5,7 +5,7 @@ const Container = styled.div`
 	  width : 100%;
 	  margin : auto;
 	  height: 50rem; ;
-	  background-color : red;	
+	  background-color : ${props => props.theme.colors.lightGray};	
 	  display : flex;
 	  flex-direction : column;
 	  align-items : center;
@@ -16,14 +16,13 @@ const NavbarContainer = styled.div`
 	height : 3rem;
 	color : white;
 	font-size : ${props => props.theme.fontSizes.small};
-	background-color : black;
+	background-color : ${props => props.theme.colors.backgroundGray};
 `;
 
 const Content = styled.div`
 	width : 50%;
 	height : 30rem;
-	background-color : gray;
-
+	background-color : ${props => props.theme.colors.transparentBlack};
 `;
 function ProfileDetails() {
 	return (
