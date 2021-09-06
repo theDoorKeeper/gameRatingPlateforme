@@ -38,18 +38,26 @@ const ProfileDate = styled.div`
 	text-align : center;
 `;
 
+const CoverPicture = styled.div`
+	width : 100%;
+	height : 50%;
+	background-color : blue;
+    background-image : ${props=> props.image};
+`;
 
 
-function ProfileCard(props) {
-	const {name, creationDate, profilePicture} = props;
+function ProfileImages(props) {
+	const {name, creationDate, profileImage, coverImage} = props;
 
 	return (
-		<Wrapper>
-			<ProfilePicture profilePicture={profilePicture}/>
-			<ProfileName>{name}</ProfileName>
-			<ProfileDate>member since : {creationDate}</ProfileDate>
-		</Wrapper>
+		<CoverPicture image = {coverImage}> 
+			<Wrapper>
+				<ProfilePicture image={profileImage}/>
+				<ProfileName>{name}</ProfileName>
+				<ProfileDate>member since : {creationDate}</ProfileDate>
+			</Wrapper>
+		</CoverPicture>
 	);
 }
 
-export default ProfileCard;
+export default ProfileImages;
