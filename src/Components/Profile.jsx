@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from './AuthProvider';
 import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
+import cover from '../assets/profileCoverTest.jpg';
+import profilePicture from '../assets/profilePicture.png';
 
 const IgnoreDiv = styled.div`
 	display : none ;
@@ -30,7 +33,7 @@ function Profile() {
 				<button onClick={handleLogout}>Logout</button>
 			</IgnoreDiv>
 			<Content>
-				<ProfileImages/>
+				<ProfileImages coverImage = {cover} profileImage = {profilePicture} name='theDoorKeeper'/>
 				<ProfileDetails/>
 			</Content>
 		</>
