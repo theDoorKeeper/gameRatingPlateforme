@@ -10,10 +10,11 @@ const theme = {
 		backgroundGray : '#222222',
 		grey : '#333',
 		lightBlue: '#AFDBD2',
-		lightGrey : '#999999',
+		lightGray : '#999999',
 		backgroundBlue : '#012169',
 		white : '#ffffff',
 		transparentWhite : '#ffffffab',
+		transparentBlack : '#00000086',
 	},
 	fonts: ['sans-serif', 'Roboto'],
 	fontSizes: {
