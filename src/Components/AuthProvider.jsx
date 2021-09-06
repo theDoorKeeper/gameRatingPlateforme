@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useContext, useState } from 'react';
-import { auth, db } from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore'; 
+import {auth} from '../firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut, updateProfile } from 'firebase/auth';
 
 
 const AuthContext = React.createContext();
@@ -17,28 +16,30 @@ export function AuthProvider({children}) {
 	const [loading, setloading] = useState(true);
 	const [signUpError, setSignUpError] = useState('');
 	const [loginError, setLoginError] = useState('');
-	const [logoutError, setlogoutError] = useState('');
+	const [logoutError, setlogoutError] = useState('');	
 
-	const createUserDoc = async (id,name)=>{
-		try {
-			await setDoc(doc(db, 'users', id), {
-				userName: name,
-			});
-		} catch (e) {
-			console.error('Error adding document: ', e);
-		}
-          
-	};
-      
 	const signUp = (email, password, name )=>{
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				// Signed in 
-				const user = userCredential.user;
-				createUserDoc(user.uid,name);
+				updateProfile(userCredential, {
+					displayName: name,
+				}).then(() => {
+
+					console.log('Profile updated!');
+
+					// ...
+				}).catch((error) => {
+					// An error occurred
+					const errorMessage = error.message;
+					console.log(errorMessage);
+					setSignUpError(errorMessage);
+					// ...
+				});
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
+				console.log(errorMessage);
 				setSignUpError(errorMessage);
 			});
 	};
@@ -52,6 +53,7 @@ export function AuthProvider({children}) {
 			})
 			.catch((error) => {
 				const errorMessage = error.message; 
+				console.log(errorMessage);
 				setLoginError(errorMessage);
 			});
 	};		
@@ -60,11 +62,13 @@ export function AuthProvider({children}) {
 	const logout = ()=>{
 		signOut(auth)
 			.then(() => {
+				console.log('logged out');
 			// Signed in 
 			// ...
 			})
 			.catch((error) => {
-				const errorMessage = error.message; 
+				const errorMessage = error.message;
+				console.log(errorMessage);
 				setlogoutError(errorMessage);
 			});
 	};
