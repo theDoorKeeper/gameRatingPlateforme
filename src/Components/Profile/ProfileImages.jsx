@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-
+import noImage from '../../assets/noImage.png';
+import noCover from '../../assets/noCover.png';
 
 const Wrapper = styled.div`
 	position : relative;
@@ -44,7 +45,7 @@ const CoverPicture = styled.div`
 	width : 100%;
 	height : 50%;
 	background : url(${props=> props.image}) no-repeat center center fixed;
-	background-color : blue;
+	background-color : ${props => props.theme.colors.backgroundGray};
 	filter : 8px;
 	background-size : cover;
 `;
@@ -54,9 +55,9 @@ function ProfileImages(props) {
 	const {name, creationDate, profileImage, coverImage} = props;
 
 	return (
-		<CoverPicture image = {coverImage}> 
+		<CoverPicture image = {coverImage ? coverImage : noCover}> 
 			<Wrapper>
-				<ProfilePicture src = {profileImage}/>
+				<ProfilePicture src = {profileImage ? profileImage : noImage}/>
 				<ProfileName>{name}</ProfileName>
 				<ProfileDate>member since : {creationDate}</ProfileDate>
 			</Wrapper>
