@@ -1,6 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Bio from './Bio';
+import Followers from './Followers';
+import Lists from './Lists';
 import Navbar from './Navbar';
 
 const Container = styled.div`
@@ -38,7 +42,9 @@ function ProfileDetails(props) {
 					<Navbar url={url}/>
 				</NavbarContainer>
 				<Content>
-					<Bio/>
+					<Route  exact path={path} > <Bio/> </Route>	
+					<Route path={`${path}/Lists`} > <Lists/> </Route>
+					<Route path={`${path}/Followers`} > <Followers/> </Route>
 				</Content>
 			</Container>
 		</>
