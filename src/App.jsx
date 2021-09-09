@@ -13,6 +13,7 @@ import Profile from './Components/Profile';
 import PrivateRoute from './Components/PrivateRoute';
 import LoginPage from './Components/LoginPage';
 import SignUpPage from './Components/SignupPage';
+import Game from './Components/Game';
 
 function App() {
 	const [loginOverlay, setloginOverlay] = useState(false);
@@ -36,6 +37,10 @@ function App() {
 								<SignUpPage overlayState={singUpOverlay} setOverlayState={setSingUpOverlay} setloginOverlay={setloginOverlay}/> </> : null}
 						</Route>
 						<PrivateRoute  path="/user" component={Profile}/>
+						<Route path="/:name">
+							<Game/>
+						</Route>
+
 					</Switch>
 				</AuthProvider>
 			</Theme>
