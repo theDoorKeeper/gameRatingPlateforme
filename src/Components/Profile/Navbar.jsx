@@ -20,19 +20,21 @@ const StyledLink = styled(NavLink)`
 
 `;
 
-function Navbar() {
+function Navbar(props) {
+	const {url} = props;
+
 	return (
 		<Nav>
 			<li>
-				<StyledLink to='user'>Bio</StyledLink>
+				<StyledLink to={`${url}`}>Bio</StyledLink>
 			</li>
 
 			<li>
-				<StyledLink  to='user/Lists'>Lists</StyledLink>
+				<StyledLink  to={`${url}/Lists`}>Lists</StyledLink>
 			</li>
 
 			<li>
-				<StyledLink  to='user/Followers'>Followers</StyledLink>
+				<StyledLink to={`${url}/Followers`}>Followers</StyledLink>
 			</li>
 		</Nav>
 	);
