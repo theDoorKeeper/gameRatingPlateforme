@@ -27,7 +27,10 @@ const Content = styled.div`
 	height : 30rem;
 	background-color : ${props => props.theme.colors.transparentBlack};
 `;
-function ProfileDetails() {
+function ProfileDetails(props) {
+	
+	const {path, url} = props;
+
 	return (
 		<>
 			<Container>
