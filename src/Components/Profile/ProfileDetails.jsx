@@ -28,14 +28,14 @@ const Content = styled.div`
 	background-color : ${props => props.theme.colors.transparentBlack};
 `;
 function ProfileDetails(props) {
-	
+
 	const {path, url} = props;
 
 	return (
 		<>
 			<Container>
 				<NavbarContainer>
-					<Navbar/>
+					<Navbar url={url}/>
 				</NavbarContainer>
 				<Content>
 					<Bio/>
