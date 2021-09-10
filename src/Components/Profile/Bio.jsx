@@ -29,7 +29,7 @@ const StatNumber = styled.p`
   font-size: ${props => props.theme.fontSizes.medium};
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
-  color: #aaa;
+  color: ${props => props.theme.colors.primaryGreen};
 `;
 
 const StatDesc = styled.p`

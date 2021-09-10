@@ -35,8 +35,8 @@ function Profile() {
 				<button onClick={handleLogout}>Logout</button>
 			</IgnoreDiv>
 			<Content>
-				<ProfileImages coverImage = {cover} profileImage = {profilePicture} name='theDoorKeeper'/>
-				<ProfileDetails path={path} url={url}/>
+				<ProfileImages coverImage = {cover} profileImage = {profilePicture} name='theDoorKeeper' user={currentUser}/>
+				<ProfileDetails path={path} url={url} user={currentUser}/>
 			</Content>
 		</>
 	);

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Route } from 'react-router-dom';
@@ -33,7 +34,7 @@ const Content = styled.div`
 `;
 function ProfileDetails(props) {
 
-	const {path, url} = props;
+	const {path, url, user} = props;
 
 	return (
 		<>

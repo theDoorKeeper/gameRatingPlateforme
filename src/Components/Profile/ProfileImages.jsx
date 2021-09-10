@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
@@ -107,7 +108,7 @@ const EditProfileLabel = styled.label`
 
 
 function ProfileImages(props) {
-	const {name, creationDate, profileImage, coverImage} = props;
+	const {name, creationDate, profileImage, coverImage, user} = props;
 
 	return (
 		<CoverPicture image = {coverImage ? coverImage : noCover}> 
