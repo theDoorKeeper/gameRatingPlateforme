@@ -50,13 +50,80 @@ const CoverPicture = styled.div`
 	background-size : cover;
 `;
 
+const DivMask = styled.div`
+	width : 100%;
+	height : 50%;
+	position : absolute;
+`;
+
+const EditCoverLabel = styled.label`
+	position : relative;
+	top : -1%;
+	height : 3rem;
+	width : 10rem;
+	font-size : ${props=> props.theme.fontSizes.medium};
+	font-weight : bold;
+	color : ${props=> props.theme.colors.transparentWhite}; 
+	background :  ${props=> props.theme.colors.transparentBlack};
+	border-radius : 5px;
+	border : none ;
+	cursor : pointer ;
+	&:hover{
+		color : ${props=> props.theme.colors.primaryGreen}; 
+	}
+	& input{
+		width : 0.5rem;
+		opacity : 0;
+		cursor : pointer;
+	}
+
+`;
+
+
+const EditProfileLabel = styled.label`
+	position : relative;
+	top : 90%;
+	left : 15%;
+	height : 3rem;
+	width : 10rem;
+	font-size : ${props=> props.theme.fontSizes.medium};
+	font-weight : bold;
+	color : ${props=> props.theme.colors.transparentWhite}; 
+	background :  ${props=> props.theme.colors.transparentBlack};
+	border-radius : 5px;
+	border : none ;
+	cursor : pointer ;
+	&:hover{
+		color : ${props=> props.theme.colors.primaryGreen}; 
+	}
+	& input{
+		width : 0.5rem;
+		opacity : 0;
+		cursor : pointer;
+	}
+
+`;
+
+
 
 function ProfileImages(props) {
 	const {name, creationDate, profileImage, coverImage} = props;
 
 	return (
 		<CoverPicture image = {coverImage ? coverImage : noCover}> 
+			<DivMask>
+				<EditCoverLabel>
+					Edit cover picture
+					<input type="file"/>
+				</EditCoverLabel>
+			</DivMask>
 			<Wrapper>
+				<DivMask>
+					<EditProfileLabel>
+					Edit profile picture
+						<input type="file"/>
+					</EditProfileLabel>
+				</DivMask>
 				<ProfilePicture src = {profileImage ? profileImage : noImage}/>
 				<ProfileName>{name}</ProfileName>
 				<ProfileDate>member since : {creationDate}</ProfileDate>
