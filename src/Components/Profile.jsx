@@ -44,6 +44,7 @@ function Profile() {
 	
 	useEffect(() => {
 		const getData = async () => {
+			setLoading(true);
 			const docRef = doc(db, 'users',  currentUser.uid);
 			const docSnap = await getDoc(docRef);
 			if (docSnap.exists()) {
@@ -54,6 +55,7 @@ function Profile() {
 				// doc.data() will be undefined in this case
 				console.log('No such document!');
 			}
+			setLoading(false);
 		};
 
 		getData();
@@ -63,11 +65,11 @@ function Profile() {
 	return (
 		<>
 			<>
-            this is his is {userData.eMail} profile
+				{ !loading && 'this is his is' + ' '  + userData.eMail + ' profile' }
 				<button onClick={handleLogout}>Logout</button>
 			</>
 			<Content>
-				<ProfileImages coverImage = {cover} profileImage = {profilePicture} name='theDoorKeeper' user={currentUser}/>
+				<ProfileImages coverImage = {userData.profilePicture} profileImage = {userData.coverPicture} name='theDoorKeeper' user={currentUser}/>
 				<ProfileDetails path={path} url={url} user={currentUser}/>
 			</Content>
 		</>
