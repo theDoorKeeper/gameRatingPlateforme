@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from './AuthProvider';
@@ -19,6 +19,7 @@ const Content = styled.div`
 
 function Profile() {
 
+	const [userData, setuserData] = useState(null);
 	const {logout,currentUser} = useAuth();
 	const history = useHistory();
 	let { path, url } = useRouteMatch();
@@ -30,10 +31,10 @@ function Profile() {
 
 	return (
 		<>
-			<IgnoreDiv>
+			<>
             this is his is {currentUser.email} profile
 				<button onClick={handleLogout}>Logout</button>
-			</IgnoreDiv>
+			</>
 			<Content>
 				<ProfileImages coverImage = {cover} profileImage = {profilePicture} name='theDoorKeeper' user={currentUser}/>
 				<ProfileDetails path={path} url={url} user={currentUser}/>
