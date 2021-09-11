@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import noImage from '../../assets/noImage.png';
 import noCover from '../../assets/noCover.png';
@@ -109,20 +109,28 @@ const EditProfileLabel = styled.label`
 
 function ProfileImages(props) {
 	const {name, creationDate, profileImage, coverImage, user} = props;
+	const profileInput = useRef();
+	const coverInput = useRef();
+
+	const handleClick = (input)=>{
+		console.log(input.current.files[0]);
+	};
 
 	return (
 		<CoverPicture image = {coverImage ? coverImage : noCover}> 
 			<DivMask>
 				<EditCoverLabel>
 					Edit cover picture
-					<input type="file"/>
+
+					<input type="file" ref={coverInput} onChange={()=>{handleClick(coverInput);}}/>
+
 				</EditCoverLabel>
 			</DivMask>
 			<Wrapper>
 				<DivMask>
 					<EditProfileLabel>
 					Edit profile picture
-						<input type="file"/>
+						<input type="file" ref={profileInput} onChange={()=>{handleClick(profileInput);}} />
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileImage ? profileImage : noImage}/>
