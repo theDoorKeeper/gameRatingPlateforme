@@ -7,7 +7,7 @@ import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
 import cover from '../assets/profileCoverTest.jpg';
 import profilePicture from '../assets/profilePicture.png';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const IgnoreDiv = styled.div`
@@ -39,6 +39,25 @@ function Profile() {
 		return unsub();
 
 	}, [currentUser]);
+
+	
+	useEffect(() => {
+		const getData = async () => {
+			const docRef = doc(db, 'users',  currentUser.uid);
+			const docSnap = await getDoc(docRef);
+			if (docSnap.exists()) {
+
+				setuserData(docSnap.data());
+				
+			} else {
+				// doc.data() will be undefined in this case
+				console.log('No such document!');
+			}
+		};
+
+		getData();
+
+	}, []);
 
 	return (
 		<>
