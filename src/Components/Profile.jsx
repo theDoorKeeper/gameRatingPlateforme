@@ -21,7 +21,8 @@ const Content = styled.div`
 
 function Profile() {
 
-	const [userData, setuserData] = useState(null);
+	const [userData, setuserData] = useState({});
+	const [loading, setLoading] = useState(false);
 	const {logout,currentUser} = useAuth();
 	const history = useHistory();
 	let { path, url } = useRouteMatch();
@@ -48,7 +49,7 @@ function Profile() {
 			if (docSnap.exists()) {
 
 				setuserData(docSnap.data());
-				
+
 			} else {
 				// doc.data() will be undefined in this case
 				console.log('No such document!');
@@ -62,7 +63,7 @@ function Profile() {
 	return (
 		<>
 			<>
-            this is his is {currentUser.email} profile
+            this is his is {userData.eMail} profile
 				<button onClick={handleLogout}>Logout</button>
 			</>
 			<Content>
