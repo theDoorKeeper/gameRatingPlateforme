@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useContext, useState } from 'react';
 import {auth, db} from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut} from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
 
@@ -41,22 +41,7 @@ export function AuthProvider({children}) {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				// Signed in 
-				updateProfile(userCredential, {
-					displayName: name,
-				}).then(() => {
-					console.log('Profile updated!');
-					// ...
-				}).catch((error) => {
-					// An error occurred
-					const errorMessage = error.message;
-					console.log(errorMessage);
-					setSignUpError(errorMessage);
-					// ...
-				});
-
-
-
-
+				createUserDoc(userCredential.user.uid,name,userCredential.user.email);
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
