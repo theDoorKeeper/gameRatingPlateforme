@@ -7,6 +7,8 @@ import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
 import cover from '../assets/profileCoverTest.jpg';
 import profilePicture from '../assets/profilePicture.png';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const IgnoreDiv = styled.div`
 	display : none ;
@@ -28,6 +30,15 @@ function Profile() {
 		await logout();
 		history.push('/');
 	};
+
+	useEffect(() => {
+		const unsub = onSnapshot(doc(db, 'users', currentUser.uid), (doc) => {
+			setuserData(doc.data());
+		});
+
+		return unsub();
+
+	}, [currentUser]);
 
 	return (
 		<>
