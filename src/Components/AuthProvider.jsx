@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useContext, useState } from 'react';
-import {auth} from '../firebase';
+import {auth, db} from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 const AuthContext = React.createContext();
@@ -11,12 +12,30 @@ export const useAuth = ()=>{
 };
 
 export function AuthProvider({children}) {
-
+	
 	const [currentUser, setcurrentUser] = useState();
 	const [loading, setloading] = useState(true);
 	const [signUpError, setSignUpError] = useState('');
 	const [loginError, setLoginError] = useState('');
 	const [logoutError, setlogoutError] = useState('');	
+
+
+	const createUserDoc = async (id,name, email)=>{
+		try {
+			await setDoc(doc(db, 'users', id), {
+				userName: name,
+				eMail : email,
+				profilePicture: null,
+				coverPicture: null,
+				bio: null,
+				followers: [],
+				wishList: [],
+			});
+		} catch (e) {
+			console.error('Error adding document: ', e);
+		}
+
+	};
 
 	const signUp = (email, password, name )=>{
 		createUserWithEmailAndPassword(auth, email, password)
@@ -25,9 +44,7 @@ export function AuthProvider({children}) {
 				updateProfile(userCredential, {
 					displayName: name,
 				}).then(() => {
-
 					console.log('Profile updated!');
-
 					// ...
 				}).catch((error) => {
 					// An error occurred
@@ -36,6 +53,10 @@ export function AuthProvider({children}) {
 					setSignUpError(errorMessage);
 					// ...
 				});
+
+
+
+
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
