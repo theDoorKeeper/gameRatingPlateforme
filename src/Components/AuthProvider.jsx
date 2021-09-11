@@ -30,9 +30,12 @@ export function AuthProvider({children}) {
 				bio: null,
 				followers: [],
 				wishList: [],
+				lists: [],
 			});
-		} catch (e) {
-			console.error('Error adding document: ', e);
+		} catch (error) {
+			const errorMessage = error.message;
+			console.log(errorMessage);
+			setSignUpError(errorMessage);
 		}
 
 	};
