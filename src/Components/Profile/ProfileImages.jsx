@@ -116,10 +116,19 @@ function ProfileImages(props) {
 	const storage = getStorage();
 	  
 	const profileStorageRef = ref(storage, `${user.uid}/Profile.jpg`);
+	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
 
 	const uploadProfilePicture = (input)=>{
 
 		uploadBytes(profileStorageRef, input.current.files[0])
+		.then((snapshot) => {
+			console.log('Uploaded a profile pictureee');
+		  })
+	};
+
+	const uploadCoverPicture = (input)=>{
+
+		uploadBytes(coverStorageRef, input.current.files[0])
 		.then((snapshot) => {
 			console.log('Uploaded a cover pictureee');
 		  })
@@ -131,7 +140,7 @@ function ProfileImages(props) {
 				<EditCoverLabel>
 					Edit cover picture
 
-					<input type="file" ref={coverInput} onChange={/* ()=>{handleClick(coverInput);} */}/>
+					<input type="file" ref={coverInput} onChange={ ()=>{uploadCoverPicture(coverInput);} }/>
 
 				</EditCoverLabel>
 			</DivMask>
