@@ -112,7 +112,7 @@ function ProfileImages(props) {
 	const [profileUrl, setProfileUrl] = useState(null);
 	const [coverUrl, setCoverUrl] = useState(null);
 	const [loading, setLoading] = useState(false);
-	
+
 	const {name, creationDate, profileImage, coverImage, user} = props;
 	const profileInput = useRef();
 	const coverInput = useRef();
@@ -123,6 +123,7 @@ function ProfileImages(props) {
 	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
 
 	const uploadProfilePicture = (input) => {
+	setLoading(true);	
     uploadBytes(profileStorageRef, input.current.files[0])
       .then((snapshot) => {
         console.log('Uploaded a profile pictureee');
@@ -133,6 +134,7 @@ function ProfileImages(props) {
         getDownloadURL(profileStorageRef).then((url) => {
           setProfileUrl(url);
           console.log(profileUrl);
+		  setLoading(false);
         });
       })
       .catch((error) => {
@@ -142,6 +144,7 @@ function ProfileImages(props) {
   };
 
   const uploadCoverPicture = (input) => {
+	  setLoading(true)
     uploadBytes(coverStorageRef, input.current.files[0])
       .then((snapshot) => {
         console.log('Uploaded a cover pictureee');
@@ -152,6 +155,7 @@ function ProfileImages(props) {
         getDownloadURL(coverStorageRef).then((url) => {
           setCoverUrl(url);
           console.log(coverUrl);
+		  setLoading(false);
         });
       })
       .catch((error) => {
