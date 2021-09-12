@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import noImage from '../../assets/noImage.png';
 import noCover from '../../assets/noCover.png';
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const Wrapper = styled.div`
 	position : relative;
@@ -111,7 +111,7 @@ const EditProfileLabel = styled.label`
 function ProfileImages(props) {
 	const [profileUrl, setProfileUrl] = useState(null);
 	const [coverUrl, setCoverUrl] = useState(null);
-	
+
 	const {name, creationDate, profileImage, coverImage, user} = props;
 	const profileInput = useRef();
 	const coverInput = useRef();
@@ -121,26 +121,45 @@ function ProfileImages(props) {
 	const profileStorageRef = ref(storage, `${user.uid}/Profile.jpg`);
 	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
 
-	const uploadProfilePicture = (input)=>{
+	const uploadProfilePicture = (input) => {
+    uploadBytes(profileStorageRef, input.current.files[0])
+      .then((snapshot) => {
+        console.log('Uploaded a profile pictureee');
 
-		uploadBytes(profileStorageRef, input.current.files[0])
-		.then((snapshot) => {
-			console.log('Uploaded a profile pictureee');
-		  })
-	};
+      })
+      .then(() => {
+		  
+        getDownloadURL(profileStorageRef).then((url) => {
+          setProfileUrl(url);
+          console.log(profileUrl);
+        });
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.log(error.message);
+      });
+  };
 
-	const uploadCoverPicture = (input)=>{
+  const uploadCoverPicture = (input) => {
+    uploadBytes(coverStorageRef, input.current.files[0])
+      .then((snapshot) => {
+        console.log('Uploaded a cover pictureee');
 
-		uploadBytes(coverStorageRef, input.current.files[0])
-		.then((snapshot) => {
-			console.log('Uploaded a cover pictureee');
-		  })
-	};
-
-	
-
+      })
+      .then(() => {
+		  
+        getDownloadURL(coverStorageRef).then((url) => {
+          setCoverUrl(url);
+          console.log(coverUrl);
+        });
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.log(error.message);
+      });
+  };
 	return (
-		<CoverPicture image = {coverImage ? coverImage : noCover}> 
+		<CoverPicture image = {coverUrl ? coverUrl : noCover}> 
 			<DivMask>
 				<EditCoverLabel>
 					Edit cover picture
@@ -156,7 +175,7 @@ function ProfileImages(props) {
 						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{uploadProfilePicture(profileInput);}} />
 					</EditProfileLabel>
 				</DivMask>
-				<ProfilePicture src = {profileImage ? profileImage : noImage}/>
+				<ProfilePicture src = {profileUrl ? profileUrl : noImage}/>
 				<ProfileName>{name}</ProfileName>
 				<ProfileDate>member since : {creationDate}</ProfileDate>
 			</Wrapper>
