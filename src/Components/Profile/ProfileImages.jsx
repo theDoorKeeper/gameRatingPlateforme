@@ -111,7 +111,8 @@ const EditProfileLabel = styled.label`
 function ProfileImages(props) {
 	const [profileUrl, setProfileUrl] = useState(null);
 	const [coverUrl, setCoverUrl] = useState(null);
-
+	const [loading, setLoading] = useState(false);
+	
 	const {name, creationDate, profileImage, coverImage, user} = props;
 	const profileInput = useRef();
 	const coverInput = useRef();
