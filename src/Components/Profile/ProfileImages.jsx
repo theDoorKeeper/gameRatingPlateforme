@@ -186,7 +186,7 @@ function ProfileImages(props) {
 				<EditCoverLabel>
 					Edit cover picture
 
-					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} } />
+					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} }  disabled={loading}/>
 
 				</EditCoverLabel>
 			</DivMask>
@@ -194,7 +194,7 @@ function ProfileImages(props) {
 				<DivMask>
 					<EditProfileLabel>
 					Edit profile picture
-						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} />
+						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} disabled={loading} />
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileUrl ? profileUrl : noImage}/>
