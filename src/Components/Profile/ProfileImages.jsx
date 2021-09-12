@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import noImage from '../../assets/noImage.png';
 import noCover from '../../assets/noCover.png';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 const Wrapper = styled.div`
 	position : relative;
@@ -112,8 +113,16 @@ function ProfileImages(props) {
 	const profileInput = useRef();
 	const coverInput = useRef();
 
-	const handleClick = (input)=>{
-		console.log(input.current.files[0]);
+	const storage = getStorage();
+	  
+	const profileStorageRef = ref(storage, `${user.uid}/Profile.jpg`);
+
+	const uploadProfilePicture = (input)=>{
+
+		uploadBytes(profileStorageRef, input.current.files[0])
+		.then((snapshot) => {
+			console.log('Uploaded a cover pictureee');
+		  })
 	};
 
 	return (
@@ -122,7 +131,7 @@ function ProfileImages(props) {
 				<EditCoverLabel>
 					Edit cover picture
 
-					<input type="file" ref={coverInput} onChange={()=>{handleClick(coverInput);}}/>
+					<input type="file" ref={coverInput} onChange={/* ()=>{handleClick(coverInput);} */}/>
 
 				</EditCoverLabel>
 			</DivMask>
@@ -130,7 +139,7 @@ function ProfileImages(props) {
 				<DivMask>
 					<EditProfileLabel>
 					Edit profile picture
-						<input type="file" ref={profileInput} onChange={()=>{handleClick(profileInput);}} />
+						<input type="file" ref={profileInput} onChange={()=>{uploadProfilePicture(profileInput);}} />
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileImage ? profileImage : noImage}/>
