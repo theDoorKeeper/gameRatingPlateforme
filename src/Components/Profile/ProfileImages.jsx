@@ -140,7 +140,7 @@ function ProfileImages(props) {
 				<EditCoverLabel>
 					Edit cover picture
 
-					<input type="file" ref={coverInput} onChange={ ()=>{uploadCoverPicture(coverInput);} }/>
+					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{uploadCoverPicture(coverInput);} }/>
 
 				</EditCoverLabel>
 			</DivMask>
@@ -148,7 +148,7 @@ function ProfileImages(props) {
 				<DivMask>
 					<EditProfileLabel>
 					Edit profile picture
-						<input type="file" ref={profileInput} onChange={()=>{uploadProfilePicture(profileInput);}} />
+						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{uploadProfilePicture(profileInput);}} />
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileImage ? profileImage : noImage}/>
