@@ -158,6 +158,23 @@ function ProfileImages(props) {
         console.log(error.message);
       });
   };
+
+
+  useEffect(() => {
+
+	getDownloadURL(coverStorageRef).then((url) => {
+		setCoverUrl(url);
+		console.log(coverUrl);
+	  });
+
+
+	getDownloadURL(profileStorageRef).then((url) => {
+		setProfileUrl(url);
+		console.log(profileUrl);
+	  });
+
+  },)
+  
 	return (
 		<CoverPicture image = {coverUrl ? coverUrl : noCover}> 
 			<DivMask>
