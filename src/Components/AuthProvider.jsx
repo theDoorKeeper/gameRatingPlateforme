@@ -22,7 +22,7 @@ export function AuthProvider({children}) {
 
 	const createUserDoc = async (id,name, email)=>{
 		try {
-			await setDoc(doc(db, 'users', id), {
+			await setDoc(doc(db, 'users', name), {
 				userName: name,
 				uid: id,
 				eMail : email,
