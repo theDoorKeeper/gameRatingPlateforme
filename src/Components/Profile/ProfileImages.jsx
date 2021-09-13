@@ -113,7 +113,7 @@ function ProfileImages(props) {
 	const [coverUrl, setCoverUrl] = useState(null);
 	const [loading, setLoading] = useState(false);
 
-	const {name, creationDate, profileImage, coverImage, user} = props;
+	const {name, creationDate, user} = props;
 	const profileInput = useRef();
 	const coverInput = useRef();
 
