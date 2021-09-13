@@ -24,6 +24,7 @@ export function AuthProvider({children}) {
 		try {
 			await setDoc(doc(db, 'users', id), {
 				userName: name,
+				uid: id,
 				eMail : email,
 				profileURL: null,
 				coverURL: null,
