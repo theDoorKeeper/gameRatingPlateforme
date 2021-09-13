@@ -113,7 +113,7 @@ function ProfileImages(props) {
 	const [coverUrl, setCoverUrl] = useState(null);
 	const [loading, setLoading] = useState(false);
 
-	const {name, creationDate, user} = props;
+	const {user} = props;
 	const profileInput = useRef();
 	const coverInput = useRef();
 
@@ -198,8 +198,8 @@ function ProfileImages(props) {
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileUrl ? profileUrl : noImage}/>
-				<ProfileName>{name}</ProfileName>
-				<ProfileDate>member since : {creationDate}</ProfileDate>
+				<ProfileName>{user.userName}</ProfileName>
+				<ProfileDate>member since :</ProfileDate>
 			</Wrapper>
 		</CoverPicture>
 	);
