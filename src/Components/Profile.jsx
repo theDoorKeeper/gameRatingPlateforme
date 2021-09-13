@@ -7,7 +7,7 @@ import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
 import cover from '../assets/profileCoverTest.jpg';
 import profilePicture from '../assets/profilePicture.png';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const IgnoreDiv = styled.div`
@@ -33,9 +33,15 @@ function Profile() {
 	};
 
 	useEffect(() => {
-		const unsub = onSnapshot(doc(db, 'users', currentUser.uid), (doc) => {
-			setuserData(doc.data());
-		});
+		const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
+
+		const unsub = onSnapshot(docRef, (querySnapshot) => {
+			let data;
+			querySnapshot.forEach((doc) => {
+				data = doc.data();
+			});
+			setuserData(data)
+		  });
 
 		return unsub();
 
@@ -45,16 +51,14 @@ function Profile() {
 	useEffect(() => {
 		const getData = async () => {
 			setLoading(true);
-			const docRef = doc(db, 'users',  currentUser.uid);
-			const docSnap = await getDoc(docRef);
-			if (docSnap.exists()) {
+			const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
 
-				setuserData(docSnap.data());
-
-			} else {
-				// doc.data() will be undefined in this case
-				console.log('No such document!');
-			}
+			const docSnap = await getDocs(docRef);
+			docSnap.forEach((doc) => {
+				// doc.data() is never undefined for query doc snapshots
+				setuserData(doc.data());
+			  });
+			  
 			setLoading(false);
 		};
 
@@ -65,12 +69,12 @@ function Profile() {
 	return (
 		<>
 			<>
-				{ !loading && 'this is his is' + ' '  + userData.eMail + ' profile' }
+				{ !loading && 'this is his is '  + userData.eMail + ' profile' }
 				<button onClick={handleLogout}>Logout</button>
 			</>
 			<Content>
-				<ProfileImages coverImage = {userData.profilePicture} profileImage = {userData.coverPicture} name='theDoorKeeper' user={currentUser}/>
-				<ProfileDetails path={path} url={url} user={currentUser}/>
+				<ProfileImages  user={userData}/>
+				<ProfileDetails path={path} url={url} user={userData}/>
 			</Content>
 		</>
 	);
