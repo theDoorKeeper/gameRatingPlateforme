@@ -73,8 +73,8 @@ function Profile() {
 				<button onClick={handleLogout}>Logout</button>
 			</>
 			<Content>
-				<ProfileImages  user={userData}/>
-				<ProfileDetails path={path} url={url} user={userData}/>
+				<ProfileImages  user={userData} ready={!loading}/>
+				<ProfileDetails path={path} url={url} user={userData} ready={!loading} />
 			</Content>
 		</>
 	);
