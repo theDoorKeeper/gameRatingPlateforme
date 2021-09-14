@@ -112,8 +112,9 @@ function ProfileImages(props) {
 	const [profileUrl, setProfileUrl] = useState(null);
 	const [coverUrl, setCoverUrl] = useState(null);
 	const [loading, setLoading] = useState(false);
+	
+	const {user,ready} = props;
 
-	const {user} = props;
 	const profileInput = useRef();
 	const coverInput = useRef();
 
@@ -166,7 +167,7 @@ function ProfileImages(props) {
 
 
   useEffect(() => {
-
+	if (ready){
 	getDownloadURL(coverStorageRef).then((url) => {
 		setCoverUrl(url);
 		console.log(coverUrl);
@@ -177,6 +178,7 @@ function ProfileImages(props) {
 		setProfileUrl(url);
 		console.log(profileUrl);
 	  });
+	}
 
   },)
 
