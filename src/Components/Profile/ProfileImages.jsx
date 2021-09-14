@@ -168,14 +168,20 @@ function ProfileImages(props) {
 
   useEffect(() => {
 	if (ready){
-	getDownloadURL(coverStorageRef).then((url) => {
+
+	getDownloadURL(coverStorageRef).then((url) => {	
+		setLoading(true);
 		setCoverUrl(url);
+		setLoading(false);
 		console.log(coverUrl);
 	  });
 
 
 	getDownloadURL(profileStorageRef).then((url) => {
+		setLoading(true);
 		setProfileUrl(url);
+		setLoading(false);
+		
 		console.log(profileUrl);
 	  });
 	}
