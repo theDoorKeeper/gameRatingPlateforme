@@ -168,25 +168,22 @@ function ProfileImages(props) {
 
   useEffect(() => {
 	if (ready){
-
-	getDownloadURL(coverStorageRef).then((url) => {	
 		setLoading(true);
-		setCoverUrl(url);
+	getDownloadURL(coverStorageRef).then((url) => {	
 		setLoading(false);
+		setCoverUrl(url);
 		console.log(coverUrl);
+
 	  });
 
 
 	getDownloadURL(profileStorageRef).then((url) => {
-		setLoading(true);
 		setProfileUrl(url);
-		setLoading(false);
-		
 		console.log(profileUrl);
 	  });
 	}
 
-  },)
+  },[ready])
 
 	return (
 		<CoverPicture image = {coverUrl ? coverUrl : noCover}> 
