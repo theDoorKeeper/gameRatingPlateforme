@@ -111,8 +111,8 @@ const EditProfileLabel = styled.label`
 function ProfileImages(props) {
 	const [profileUrl, setProfileUrl] = useState(null);
 	const [coverUrl, setCoverUrl] = useState(null);
-	const [loading, setLoading] = useState(false);
-	
+	const [profileLoading, setProfileLoading] = useState(false);
+	const [coverLoading, setCoverLoading] = useState(false);
 	const {user,ready} = props;
 
 	const profileInput = useRef();
@@ -124,7 +124,7 @@ function ProfileImages(props) {
 	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
 
 	const uploadProfilePicture = (input) => {
-	setLoading(true);	
+	setProfileLoading(true);	
     uploadBytes(profileStorageRef, input.current.files[0])
       .then((snapshot) => {
         console.log('Uploaded a profile pictureee');
@@ -135,7 +135,7 @@ function ProfileImages(props) {
         getDownloadURL(profileStorageRef).then((url) => {
           setProfileUrl(url);
           console.log(profileUrl);
-		  setLoading(false);
+		  setProfileLoading(false);
         });
       })
       .catch((error) => {
@@ -145,7 +145,7 @@ function ProfileImages(props) {
   };
 
   const uploadCoverPicture = (input) => {
-	  setLoading(true)
+	setCoverLoading(true)
     uploadBytes(coverStorageRef, input.current.files[0])
       .then((snapshot) => {
         console.log('Uploaded a cover pictureee');
@@ -156,7 +156,7 @@ function ProfileImages(props) {
         getDownloadURL(coverStorageRef).then((url) => {
           setCoverUrl(url);
           console.log(coverUrl);
-		  setLoading(false);
+		  setCoverLoading(false);
         });
       })
       .catch((error) => {
@@ -168,17 +168,17 @@ function ProfileImages(props) {
 
   useEffect(() => {
 	if (ready){
-		setLoading(true);
+		setCoverLoading(true);
+		setProfileLoading(true);
 	getDownloadURL(coverStorageRef).then((url) => {	
-		setLoading(false);
 		setCoverUrl(url);
-		console.log(coverUrl);
-
+		setCoverLoading(false);
 	  });
 
 
 	getDownloadURL(profileStorageRef).then((url) => {
 		setProfileUrl(url);
+		setProfileLoading(false);
 		console.log(profileUrl);
 	  });
 	}
@@ -191,7 +191,7 @@ function ProfileImages(props) {
 				<EditCoverLabel>
 					Edit cover picture
 
-					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} }  disabled={loading}/>
+					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} }  disabled={coverLoading && profileLoading}/>
 
 				</EditCoverLabel>
 			</DivMask>
@@ -199,7 +199,7 @@ function ProfileImages(props) {
 				<DivMask>
 					<EditProfileLabel>
 					Edit profile picture
-						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} disabled={loading} />
+						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} disabled={coverLoading && profileLoading} />
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileUrl ? profileUrl : noImage}/>
