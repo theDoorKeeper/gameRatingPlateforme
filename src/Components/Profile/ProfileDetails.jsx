@@ -43,7 +43,7 @@ function ProfileDetails(props) {
 					<Navbar url={url}/>
 				</NavbarContainer>
 				<Content>
-					<Route  exact path={path} > <Bio biodesc={user.bio} followersNumber={user.followers.length} listsNumber={user.lists.length} /> </Route>	
+					<Route  exact path={path} > <Bio user={user}/> </Route>	
 					<Route path={`${path}/Lists`} > <Lists/> </Route>
 					<Route path={`${path}/Followers`} > <Followers/> </Route>
 				</Content>
