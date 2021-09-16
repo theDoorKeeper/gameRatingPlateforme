@@ -78,7 +78,6 @@ const EditCoverLabel = styled.label`
 		opacity : 0;
 		cursor : pointer;
 	}
-
 `;
 
 
@@ -103,7 +102,6 @@ const EditProfileLabel = styled.label`
 		opacity : 0;
 		cursor : pointer;
 	}
-
 `;
 
 
@@ -191,7 +189,7 @@ function ProfileImages(props) {
 				<EditCoverLabel>
 					Edit cover picture
 
-					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} }  disabled={!coverLoading && !profileLoading}/>
+					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} }  disabled={coverLoading || profileLoading}/>
 
 				</EditCoverLabel>
 			</DivMask>
@@ -199,7 +197,7 @@ function ProfileImages(props) {
 				<DivMask>
 					<EditProfileLabel>
 					Edit profile picture
-						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} disabled={!coverLoading && !profileLoading} />
+						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} disabled={coverLoading || profileLoading} />
 					</EditProfileLabel>
 				</DivMask>
 				<ProfilePicture src = {profileUrl ? profileUrl : noImage}/>
