@@ -58,24 +58,24 @@ const BioDesc = styled.p`
   overflow : hidden;
   `;
 function Bio(props) {
-	const {bioDesc} = props;
+	const {user} = props;
 
 	return (
 		<Container>
 
 			<Stats>
 				<StatWrapper>
-					<StatNumber> 152</StatNumber>
+					<StatNumber> { user.followers ? user.followers.length : 0 }</StatNumber>
 					<StatDesc>Followers</StatDesc>
 				</StatWrapper>
 
 				<StatWrapper>
-					<StatNumber> 25</StatNumber>
+					<StatNumber> { user.lists ? user.lists.length : 0 }</StatNumber>
 					<StatDesc>Lists</StatDesc>
 				</StatWrapper>
 
 				<StatWrapper>
-					<StatNumber>20</StatNumber>
+					<StatNumber>{ user.wishList ? user.wishList.length : 0 }</StatNumber>
 					<StatDesc>Wished games</StatDesc>
 				</StatWrapper>
 			</Stats>
@@ -83,7 +83,7 @@ function Bio(props) {
 			<Bar/>
 
 			<BioDesc>
-				{bioDesc ? bioDesc : 'He should be your Bio.'}
+				{user.bio ? user.bio : 'He should be your Bio.'}
 
 			</BioDesc>
 
