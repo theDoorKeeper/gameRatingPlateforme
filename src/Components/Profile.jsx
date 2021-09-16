@@ -32,7 +32,7 @@ function Profile() {
 		history.push('/');
 	};
 
-	useEffect(() => {
+/* 	useEffect(() => {
 		const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
 
 		const unsub = onSnapshot(docRef, (querySnapshot) => {
@@ -45,7 +45,7 @@ function Profile() {
 
 		return unsub();
 
-	}, [currentUser]);
+	}, [currentUser]); */
 
 	
 	useEffect(() => {
@@ -64,7 +64,7 @@ function Profile() {
 
 		getData();
 
-	}, []);
+	}, [currentUser]);
 
 	return (
 		<>
@@ -72,10 +72,10 @@ function Profile() {
 				{ !loading && 'this is his is '  + userData.eMail + ' profile' }
 				<button onClick={handleLogout}>Logout</button>
 			</>
-			<Content>
+			{ !loading && <Content>
 				<ProfileImages  user={userData} ready={!loading}/>
 				<ProfileDetails path={path} url={url} user={userData} ready={!loading} />
-			</Content>
+			</Content>}
 		</>
 	);
 }
