@@ -5,6 +5,10 @@ import styled from 'styled-components';
 import { useAuth } from './AuthProvider';
 import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
+import cover from '../assets/profileCoverTest.jpg';
+import profilePicture from '../assets/profilePicture.png';
+import { collection, doc, getDoc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const IgnoreDiv = styled.div`
 	display : none ;
@@ -16,6 +20,9 @@ const Content = styled.div`
 `;
 
 function Profile() {
+
+	const [userData, setuserData] = useState({});
+	const [loading, setLoading] = useState(false);
 	const {logout,currentUser} = useAuth();
 	const history = useHistory();
 	let { path, url } = useRouteMatch();
@@ -25,16 +32,54 @@ function Profile() {
 		history.push('/');
 	};
 
+	useEffect(() => {
+	
+		const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
+
+		const unsub = onSnapshot(docRef, (querySnapshot) => {
+			setLoading(true); 
+			let data = {};
+			querySnapshot.forEach((doc) => {
+				data = doc.data();
+				console.log("edited")
+			});
+			setuserData(data);
+			setLoading(false);
+		  });
+
+		return unsub
+
+	},[]);
+
+	
+	useEffect(() => {
+		const getData = async () => {
+			setLoading(true);
+			const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
+
+			const docSnap = await getDocs(docRef);
+			docSnap.forEach((doc) => {
+				// doc.data() is never undefined for query doc snapshots
+				setuserData(doc.data());
+			  });
+			  
+			setLoading(false);
+		};
+
+		getData();
+
+	}, []);
+
 	return (
 		<>
 			<>
-				{ ' profile' }
+				{ !loading && 'this is his is '  + userData.eMail + ' profile' }
 				<button onClick={handleLogout}>Logout</button>
 			</>
-			  <Content>
-				<ProfileImages  user={currentUser} ready={currentUser}/>
-				<ProfileDetails path={path} url={url} user={currentUser}/>
-			</Content>
+			{userData && <Content>
+				<ProfileImages  user={userData} ready={!loading}/>
+				<ProfileDetails path={path} url={url} user={userData} ready={!loading} />
+			</Content>}
 		</>
 	);
 }
