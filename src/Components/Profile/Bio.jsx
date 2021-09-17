@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from '../Button';
 import Overlay from '../Overlay';
 
 const Container = styled.div`
@@ -73,6 +74,25 @@ const BioDesc = styled.p`
     color : ${props => props.theme.colors.primaryGreen};
   }
  `;
+
+const FormWrapper = styled.form`
+  display:flex;
+  flex-direction : column;
+  gap : 3rem;
+  height : 100%;
+  align-items : center;
+  justify-content :center;
+`;
+
+ const EditInput = styled.textarea`
+  resize : none;
+  width: 60%;
+  height : 30%;
+  background : ${props => props.theme.colors.transparentWhite};
+  color : black;
+  font-size : ${props => props.theme.fontSizes.medium};
+ `;
+
 function Bio(props) {
 	const {user} = props;
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -80,7 +100,13 @@ function Bio(props) {
 
 	return (
 		<Container>
-      <Overlay visible={overlayVisible}  setVisible={setOverlayVisible} >dededede</Overlay>
+      <Overlay visible={overlayVisible}  setVisible={setOverlayVisible} >
+        <FormWrapper>  
+                  <EditInput/>
+                  <Button name='Confirm'/>
+        </FormWrapper>
+
+      </Overlay>
 			<Stats>
 				<StatWrapper>
 					<StatNumber> { user.followers ? user.followers.length : 0 }</StatNumber>
