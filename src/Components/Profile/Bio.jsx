@@ -99,7 +99,7 @@ function Bio(props) {
 			</Stats>
 
 			<Bar/>
- <EditBio> edit bio </EditBio>
+    <EditBio onClick={ () => {setOverlayVisible(true)}}> edit bio </EditBio>
 			<BioDesc>
        
 				{user.bio ? user.bio : 'He should be your Bio.'}
