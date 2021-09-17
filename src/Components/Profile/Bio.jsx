@@ -56,7 +56,22 @@ const BioDesc = styled.p`
   padding-bottom: 25px;
   min-height: 4.1rem;
   overflow : hidden;
+  display : flex;
+  flex-direction : column;
   `;
+
+ const EditBio = styled.button`
+  height : fit-content;
+  width : fit-content;
+  border : none;
+  background : ${props => props.theme.colors.transparentBlack};
+  font-size : ${props => props.theme.fontSizes.medium};
+  font-weight : bold;
+  cursor : pointer;
+  &:hover{
+    color : ${props => props.theme.colors.primaryGreen};
+  }
+ `;
 function Bio(props) {
 	const {user} = props;
 
@@ -81,8 +96,9 @@ function Bio(props) {
 			</Stats>
 
 			<Bar/>
-
+ <EditBio> edit bio </EditBio>
 			<BioDesc>
+       
 				{user.bio ? user.bio : 'He should be your Bio.'}
 
 			</BioDesc>
