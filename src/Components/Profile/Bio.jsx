@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { collection, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import React, { useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { db } from '../../firebase';
 import Button from '../Button';
@@ -98,6 +99,7 @@ const EditInput = styled.textarea`
 function Bio(props) {
 	const {user} = props;
 	const [overlayVisible, setOverlayVisible] = useState(false);
+	const newBio = useRef();
 
 	const updateBio = async (e)=>{
 		e.preventDefault();
@@ -107,7 +109,7 @@ function Bio(props) {
 		docSnap.forEach((doc) => {
 			// doc.data() is never undefined for query doc snapshots
 			updateDoc(doc.ref, {
-				bio: 'blblblblb'
+				bio: newBio.current.value,
 			});	  
 		});
 
@@ -118,8 +120,8 @@ function Bio(props) {
 		<Container>
 			<Overlay visible={overlayVisible}  setVisible={setOverlayVisible} >
 				<FormWrapper>  
-					<EditInput/>
-					<Button name='Confirm' onClick={updateBio}/>
+					<EditInput ref={newBio}/>
+					<Button type='submit' name='Confirm' onClick={updateBio}/>
 				</FormWrapper>
 
 			</Overlay>
