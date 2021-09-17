@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -74,6 +74,8 @@ const BioDesc = styled.p`
  `;
 function Bio(props) {
 	const {user} = props;
+  const [overlayVisible, setOverlayVisible] = useState(false);
+
 
 	return (
 		<Container>
