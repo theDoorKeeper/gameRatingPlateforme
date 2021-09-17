@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import noImage from '../../assets/noImage.png';
 import noCover from '../../assets/noCover.png';
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const Wrapper = styled.div`
 	position : relative;
@@ -117,71 +117,70 @@ function ProfileImages(props) {
 	const coverInput = useRef();
 
 	const storage = getStorage();
-	  
+
 	const profileStorageRef = ref(storage, `${user.uid}/Profile.jpg`);
 	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
 
 	const uploadProfilePicture = (input) => {
-	setProfileLoading(true);	
-    uploadBytes(profileStorageRef, input.current.files[0])
-      .then((snapshot) => {
-        console.log('Uploaded a profile pictureee');
+		setProfileLoading(true);	
+		uploadBytes(profileStorageRef, input.current.files[0])
+			.then((snapshot) => {
+				console.log('Uploaded a profile pictureee');
 
-      })
-      .then(() => {
-		  
-        getDownloadURL(profileStorageRef).then((url) => {
-          setProfileUrl(url);
-          console.log(profileUrl);
-		  setProfileLoading(false);
-        });
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.log(error.message);
-      });
-  };
+			})
+			.then(() => {
+				getDownloadURL(profileStorageRef).then((url) => {
+					setProfileUrl(url);
+					console.log(profileUrl);
+					setProfileLoading(false);
+				});
+			})
+			.catch((error) => {
+				// Handle any errors
+				console.log(error.message);
+			});
+	};
 
-  const uploadCoverPicture = (input) => {
-	setCoverLoading(true)
-    uploadBytes(coverStorageRef, input.current.files[0])
-      .then((snapshot) => {
-        console.log('Uploaded a cover pictureee');
-
-      })
-      .then(() => {
-		  
-        getDownloadURL(coverStorageRef).then((url) => {
-          setCoverUrl(url);
-          console.log(coverUrl);
-		  setCoverLoading(false);
-        });
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.log(error.message);
-      });
-  };
-
-
-  useEffect(() => {
-	if (user){
+	const uploadCoverPicture = (input) => {
 		setCoverLoading(true);
-		setProfileLoading(true);
-	getDownloadURL(coverStorageRef).then((url) => {	
-		setCoverUrl(url);
-		setCoverLoading(false);
-	  });
+		uploadBytes(coverStorageRef, input.current.files[0])
+			.then((snapshot) => {
+				console.log('Uploaded a cover pictureee');
+
+			})
+			.then(() => {
+  
+				getDownloadURL(coverStorageRef).then((url) => {
+					setCoverUrl(url);
+					console.log(coverUrl);
+					setCoverLoading(false);
+				});
+			})
+			.catch((error) => {
+				// Handle any errors
+				console.log(error.message);
+			});
+	};
 
 
-	getDownloadURL(profileStorageRef).then((url) => {
-		setProfileUrl(url);
-		setProfileLoading(false);
-		console.log(profileUrl);
-	  });
-	}
+	useEffect(() => {
+		if (user){
+			setCoverLoading(true);
+			setProfileLoading(true);
+			getDownloadURL(coverStorageRef).then((url) => {	
+				setCoverUrl(url);
+				setCoverLoading(false);
+			});
 
-  },[user])
+
+			getDownloadURL(profileStorageRef).then((url) => {
+				setProfileUrl(url);
+				setProfileLoading(false);
+				console.log(profileUrl);
+			});
+		}
+
+	},[user]);
 
 	return (
 		<CoverPicture image = {coverUrl ? coverUrl : noCover}> 
