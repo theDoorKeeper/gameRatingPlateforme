@@ -19,12 +19,12 @@ const Container = styled.div`
 `;
 
 const NavbarContainer = styled.div`
-	width : 100%;
+	width : 70%;
 	height : 3rem;
 	color : white;
 	font-size : ${props => props.theme.fontSizes.small};
 	background-color : ${props => props.theme.colors.backgroundGray};
-	padding-left: 50%;
+	padding-left: 30%;
 `;
 
 const Content = styled.div`
