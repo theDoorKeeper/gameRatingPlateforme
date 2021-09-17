@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Overlay from '../Overlay';
 
 const Container = styled.div`
     min-width : 100%;
@@ -79,7 +80,7 @@ function Bio(props) {
 
 	return (
 		<Container>
-
+      <Overlay visible={overlayVisible}  setVisible={setOverlayVisible} >dededede</Overlay>
 			<Stats>
 				<StatWrapper>
 					<StatNumber> { user.followers ? user.followers.length : 0 }</StatNumber>
