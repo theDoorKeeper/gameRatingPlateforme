@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
+import { collection, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { db } from '../../firebase';
 import Button from '../Button';
 import Overlay from '../Overlay';
 
@@ -62,7 +64,7 @@ const BioDesc = styled.p`
   flex-direction : column;
   `;
 
- const EditBio = styled.button`
+const EditBio = styled.button`
   height : fit-content;
   width : fit-content;
   border : none;
@@ -84,7 +86,7 @@ const FormWrapper = styled.form`
   justify-content :center;
 `;
 
- const EditInput = styled.textarea`
+const EditInput = styled.textarea`
   resize : none;
   width: 60%;
   height : 30%;
@@ -95,18 +97,32 @@ const FormWrapper = styled.form`
 
 function Bio(props) {
 	const {user} = props;
-  const [overlayVisible, setOverlayVisible] = useState(false);
+	const [overlayVisible, setOverlayVisible] = useState(false);
 
+	const updateBio = async (e)=>{
+		e.preventDefault();
+		const docRef = query(collection(db, 'users'), where('uid', '==', user.uid));
+		const docSnap = await getDocs(docRef);
+
+		docSnap.forEach((doc) => {
+			// doc.data() is never undefined for query doc snapshots
+			updateDoc(doc.ref, {
+				bio: 'blblblblb'
+			});	  
+		});
+
+
+	};
 
 	return (
 		<Container>
-      <Overlay visible={overlayVisible}  setVisible={setOverlayVisible} >
-        <FormWrapper>  
-                  <EditInput/>
-                  <Button name='Confirm'/>
-        </FormWrapper>
+			<Overlay visible={overlayVisible}  setVisible={setOverlayVisible} >
+				<FormWrapper>  
+					<EditInput/>
+					<Button name='Confirm' onClick={updateBio}/>
+				</FormWrapper>
 
-      </Overlay>
+			</Overlay>
 			<Stats>
 				<StatWrapper>
 					<StatNumber> { user.followers ? user.followers.length : 0 }</StatNumber>
@@ -125,7 +141,7 @@ function Bio(props) {
 			</Stats>
 
 			<Bar/>
-    <EditBio onClick={ () => {setOverlayVisible(true)}}> edit bio </EditBio>
+			<EditBio onClick={ () => {setOverlayVisible(true);}}> edit bio </EditBio>
 			<BioDesc>
        
 				{user.bio ? user.bio : 'He should be your Bio.'}
