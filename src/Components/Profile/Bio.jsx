@@ -113,6 +113,8 @@ function Bio(props) {
 			});	  
 		});
 
+		setOverlayVisible(false);
+
 
 	};
 
