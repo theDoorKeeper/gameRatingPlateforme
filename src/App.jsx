@@ -36,8 +36,8 @@ function App() {
 							{!currentUser ? <> <LoginPage overlayState={loginOverlay} setOverlayState={setloginOverlay} setSingUpOverlay={setSingUpOverlay}/>
 								<SignUpPage overlayState={singUpOverlay} setOverlayState={setSingUpOverlay} setloginOverlay={setloginOverlay}/> </> : null}
 						</Route>
-						<PrivateRoute  path="/user" component={Profile}/>
-						<Route path="/:name">
+						<PrivateRoute  path="/Profile" component={Profile}/>
+						<Route path="/Game/:name">
 							<Game/>
 						</Route>
 
