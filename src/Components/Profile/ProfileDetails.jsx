@@ -34,7 +34,7 @@ const Content = styled.div`
 `;
 function ProfileDetails(props) {
 
-	const {path, url, user} = props;
+	const {path, url, user, notUser} = props;
 
 	return (
 		<>
@@ -43,7 +43,7 @@ function ProfileDetails(props) {
 					<Navbar url={url}/>
 				</NavbarContainer>
 				<Content>
-					<Route  exact path={path} > <Bio user={user}/> </Route>	
+					<Route  exact path={path} > <Bio user={user} notUser={notUser}/> </Route>	
 					<Route path={`${path}/Lists`} > <Lists/> </Route>
 					<Route path={`${path}/Followers`} > <Followers/> </Route>
 				</Content>
