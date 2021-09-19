@@ -111,7 +111,7 @@ function ProfileImages(props) {
 	const [coverUrl, setCoverUrl] = useState(null);
 	const [profileLoading, setProfileLoading] = useState(false);
 	const [coverLoading, setCoverLoading] = useState(false);
-	const {user} = props;
+	const {user, notUser} = props;
 
 	const profileInput = useRef();
 	const coverInput = useRef();
@@ -184,21 +184,21 @@ function ProfileImages(props) {
 
 	return (
 		<CoverPicture image = {coverUrl ? coverUrl : noCover}> 
-			<DivMask>
+			{	!notUser	&&	<DivMask>
 				<EditCoverLabel>
 					Edit cover picture
 
 					<input type="file" accept=".png, .jpg, .jpeg" ref={coverInput} onChange={ ()=>{coverInput.current.value && uploadCoverPicture(coverInput);} }  disabled={coverLoading || profileLoading}/>
 
 				</EditCoverLabel>
-			</DivMask>
+			</DivMask>}
 			<Wrapper>
-				<DivMask>
+				{ !notUser	&& <DivMask>
 					<EditProfileLabel>
 					Edit profile picture
 						<input type="file" accept=".png, .jpg, .jpeg" ref={profileInput} onChange={()=>{profileInput.current.value && uploadProfilePicture(profileInput);}} disabled={coverLoading || profileLoading} />
 					</EditProfileLabel>
-				</DivMask>
+				</DivMask>}
 				<ProfilePicture src = {profileUrl ? profileUrl : noImage}/>
 				<ProfileName>{user.userName}</ProfileName>
 				<ProfileDate>member since :</ProfileDate>
