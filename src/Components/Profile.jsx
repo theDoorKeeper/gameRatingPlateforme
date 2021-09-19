@@ -5,14 +5,8 @@ import styled from 'styled-components';
 import { useAuth } from './AuthProvider';
 import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
-import cover from '../assets/profileCoverTest.jpg';
-import profilePicture from '../assets/profilePicture.png';
-import { collection, doc, getDoc, getDocs, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
-
-const IgnoreDiv = styled.div`
-	display : none ;
-`;
 
 const Content = styled.div`
 	width : 100%;
@@ -34,20 +28,20 @@ function Profile() {
 
 	useEffect(() => {
 	
-		const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
+		const docRef = query(collection(db, 'users'), where('uid', '==', currentUser.uid));
 
 		const unsub = onSnapshot(docRef, (querySnapshot) => {
 			setLoading(true); 
 			let data = {};
 			querySnapshot.forEach((doc) => {
 				data = doc.data();
-				console.log("edited")
+				console.log('edited');
 			});
 			setuserData(data);
 			setLoading(false);
-		  });
+		});
 
-		return unsub
+		return unsub;
 
 	},[]);
 
@@ -55,14 +49,14 @@ function Profile() {
 	useEffect(() => {
 		const getData = async () => {
 			setLoading(true);
-			const docRef = query(collection(db, 'users'), where("uid", "==", currentUser.uid));
+			const docRef = query(collection(db, 'users'), where('uid', '==', currentUser.uid));
 
 			const docSnap = await getDocs(docRef);
 			docSnap.forEach((doc) => {
 				// doc.data() is never undefined for query doc snapshots
 				setuserData(doc.data());
-			  });
-			  
+			});
+ 
 			setLoading(false);
 		};
 
