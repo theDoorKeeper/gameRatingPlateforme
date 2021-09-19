@@ -97,7 +97,7 @@ const EditInput = styled.textarea`
  `;
 
 function Bio(props) {
-	const {user} = props;
+	const {user, notUser} = props;
 	const [overlayVisible, setOverlayVisible] = useState(false);
 	const newBio = useRef();
 
@@ -145,7 +145,7 @@ function Bio(props) {
 			</Stats>
 
 			<Bar/>
-			<EditBio onClick={ () => {setOverlayVisible(true);}}> edit bio </EditBio>
+			{	 !notUser	&& <EditBio onClick={ () => {setOverlayVisible(true);}}> edit bio </EditBio>}
 			<BioDesc>
        
 				{user.bio ? user.bio : 'He should be your Bio.'}
