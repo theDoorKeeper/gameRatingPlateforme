@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 const Header = styled.div`
@@ -87,6 +88,8 @@ background-color:yellow;
 
 function Game() {
 	const { name } = useParams();
+
+	const [exists, setExists] = useState(true);
 	
 	return (
 		<div>
