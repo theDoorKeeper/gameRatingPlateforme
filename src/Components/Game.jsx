@@ -93,6 +93,7 @@ function Game() {
 	const { name } = useParams();
 
 	const [exists, setExists] = useState(true);
+	const [gameData, setgameData] = useState(null);
 
 	const queryGame = async () =>{
 		axios({
@@ -105,6 +106,7 @@ function Game() {
 		})
 			.then(response => {
 				console.log(response.data);
+				setgameData(response.data);
 			})
 			.catch(err => {
 				console.error(err);
