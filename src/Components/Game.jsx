@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { doc, getDoc } from 'firebase/firestore';
+import axios from 'axios';
 const Header = styled.div`
 position : absolute;
 display : flex;
@@ -90,7 +93,32 @@ function Game() {
 	const { name } = useParams();
 
 	const [exists, setExists] = useState(true);
-	
+
+	const queryGame = async () =>{
+		axios({
+			url: `https://rawg-video-games-database.p.rapidapi.com/games/${name}?key=43d9190ae1bb47f9a9a2276650e8b411`,
+			method: 'GET',
+			headers: {
+				'x-rapidapi-host': 'rawg-video-games-database.p.rapidapi.com',
+				'x-rapidapi-key': '4d60ceecd9mshd2062f54ef385b3p131f5bjsnee5d0dd46364'			
+			},
+		})
+			.then(response => {
+				console.log(response.data);
+			})
+			.catch(err => {
+				console.error(err);
+				setExists(false);
+			});
+		
+	};
+	useEffect(() => {
+		
+		queryGame();
+
+	}, []);
+
+
 	return (
 		<div>
 
