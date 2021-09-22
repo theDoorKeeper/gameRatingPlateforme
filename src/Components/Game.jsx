@@ -90,6 +90,7 @@ const Bar = styled.hr`
     border-width : 0;
     background-color : ${props => props.theme.colors.lightGray};
   `;
+
 function Game() {
 	const { name } = useParams();
 
@@ -138,10 +139,11 @@ function Game() {
 			</CoverPicture>
 			<Content>
 				<GameDetailsCard> 
-					<h1>Genres : <>{ gameData && gameData.genres.map((genre,i) => genre.name +' ' )}</></h1>
-					<h1>Platfroms : <>{ gameData && gameData.platforms.map((platform,i) => platform.platform.name +' ' )}</></h1>
+					<h3>Genres : <>{ gameData && gameData.genres.map((genre,i) => genre.name +' ' )}</></h3>
+					<h3>Platfroms : <>{ gameData && gameData.platforms.map((platform,i) => platform.platform.name +', ' )}</></h3>
 					{ gameData && gameData.description_raw}
 					<Bar/>
+					<h3>Avaible on : <>{ gameData && gameData.stores.map((store,i) => store.store.name +' ' )}</></h3>
 				</GameDetailsCard>
 				<GameRatingCard/>
 			</Content>
