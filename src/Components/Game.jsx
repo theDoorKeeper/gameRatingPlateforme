@@ -5,24 +5,44 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { doc, getDoc } from 'firebase/firestore';
 import axios from 'axios';
-const Header = styled.div`
-position : absolute;
-display : flex;
-justify-content : center;
-width : 100%;
-background-color : red ;
-height : 40%;
+
+
+const Wrapper = styled.div`
+	position : relative;
+	width : 15rem;
+	height : 20rem;
+	display : flex;
+	justify-content : center;
+	gap : 2rem;
+	left : 15%;
+	z-index : 2;
 `;
 
-const TittleWrapper = styled.div`
+const GamePicture = styled.img`
+	width : 15rem;
+	height : 25rem;
+	margin-top : 15%;
+	border : 3px solid transparent;
+	&:hover{
+		border : 3px solid ${props => props.theme.colors.primaryGreen};
+		cursor : pointer;
+	}
+`;
+
+const CoverPicture = styled.div`
+	width : 100%;
+	height : 50%;
+	background : url(${props=> props.image}) no-repeat center center fixed;
+	background-color : ${props => props.theme.colors.backgroundGray};
+	filter : 8px;
+	background-size : cover;
+`;
+
+const TitleWrapper = styled.div`
 display : flex;
 flex-direction: column;
-width : 30%;
 align-self : flex-end;
-margin-left : -10rem;
-
 & :first-child{
     font-size : ${props => props.theme.fontSizes.large};
     color : ${props => props.theme.colors.white};
@@ -40,41 +60,8 @@ margin-left : -10rem;
 `;
 
 const Content = styled.div`
-padding-left : 35rem;
-margin-top: -4.5rem;
+margin-left : 35rem;
 display : flex;
-`;
-
-const GameCardWrapper = styled.div`
-width : 15rem;
-height : 25rem;
-display : flex;
-z-index : 5;
-flex-direction : column;
-gap : 1rem;
-justify-content: center;
-position : relative;
-top : 6rem;
-left : 20rem;
-`;
-
-const GameCard = styled.div`
-background : green;
-width : 100%;
-height : 78%;
-
-`;
-
-const Followbtn = styled.button`
-width : 100%;
-height : 10%;
-`;
-
-const GameCardDesc = styled.div`
-width : 100%;
-height : 10;
-font-size : ${props => props.theme.fontSizes.small};
-color : ${props => props.theme.colors.transparentWhite};
 `;
 
 const GameDetailsCard = styled.div`
@@ -114,31 +101,33 @@ function Game() {
 			});
 		
 	};
+
 	useEffect(() => {
 		
-		queryGame();
+		queryGame(); 
 
 	}, []);
 
 
 	return (
-		<div>
+		<>
 
-			<Header>
-				<TittleWrapper><div>{name} : Edition test</div> <div>description dedede</div> <div>company name : test</div></TittleWrapper>
-			</Header>
-
-			<GameCardWrapper>
-				<GameCard/>
-				<Followbtn>follow</Followbtn>
-				<GameCardDesc> test desc</GameCardDesc>
-			</GameCardWrapper>
+			<CoverPicture image ={gameData && gameData.background_image}> 
+				<Wrapper>
+					<GamePicture src = {gameData && gameData.background_image_additional}/>
+					<TitleWrapper>
+						<div> {gameData && gameData.name} </div>
+						<div> Studio : {gameData && gameData.developers.map((developer,i) => developer.name )} </div>
+						<div> {gameData && gameData.genres.map((developer,i) => developer.name )} </div>
+					</TitleWrapper>
+				</Wrapper>
+			</CoverPicture>
 			<Content>
-				<GameDetailsCard/>
+				<GameDetailsCard> { gameData && gameData.description_raw} </GameDetailsCard>
 				<GameRatingCard/>
 			</Content>
 		
-		</div>
+		</>
 	);
 }
 
