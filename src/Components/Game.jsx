@@ -35,26 +35,35 @@ const CoverPicture = styled.div`
 	height : 50%;
 	background : url(${props=> props.image}) no-repeat center center fixed;
 	background-color : ${props => props.theme.colors.backgroundGray};
-	filter : 8px;
 	background-size : cover;
+	&::before{
+		content: "";
+    position: absolute;
+    width : 100%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
+		filter : blur(10px);
+	}
 `;
 
 const TitleWrapper = styled.div`
 display : flex;
 flex-direction: column;
 align-self : flex-end;
+text-shadow: 0.01px 0.1px ${props => props.theme.colors.primaryGreen};
 & :first-child{
     font-size : ${props => props.theme.fontSizes.large};
-    color : ${props => props.theme.colors.white};
+    color : ${props => props.theme.colors.black};
 };
 & :nth-child(2){
     font-size : ${props => props.theme.fontSizes.medium};
-    color : ${props => props.theme.colors.transparentWhite};
+    color : ${props => props.theme.colors.transparentBlack};
 };  
 
 & :nth-child(3){
     font-size : ${props => props.theme.fontSizes.small};
-    color : ${props => props.theme.colors.transparentWhite};
+    color : ${props => props.theme.colors.transparentBlack};
 };
 
 `;
