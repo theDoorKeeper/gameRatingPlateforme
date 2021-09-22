@@ -76,7 +76,7 @@ const Content = styled.div`
 const GameDetailsCard = styled.div`
 	width : 50%;
 	min-height : 30rem;
-	background-color : ${props => props.theme.colors.lightGray};	
+	background-color : ${props => props.theme.colors.grey};	
 `;
 
 const GameRatingCard = styled.div`
@@ -84,7 +84,12 @@ const GameRatingCard = styled.div`
 	background-color:yellow;
 
 `;
-
+const Bar = styled.hr`
+    width : 80%;
+    height : 1px; 
+    border-width : 0;
+    background-color : ${props => props.theme.colors.lightGray};
+  `;
 function Game() {
 	const { name } = useParams();
 
@@ -136,6 +141,7 @@ function Game() {
 					<h1>Genres : <>{ gameData && gameData.genres.map((genre,i) => genre.name +' ' )}</></h1>
 					<h1>Platfroms : <>{ gameData && gameData.platforms.map((platform,i) => platform.platform.name +' ' )}</></h1>
 					{ gameData && gameData.description_raw}
+					<Bar/>
 				</GameDetailsCard>
 				<GameRatingCard/>
 			</Content>
