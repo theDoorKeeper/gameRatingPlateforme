@@ -20,9 +20,9 @@ const Wrapper = styled.div`
 `;
 
 const GamePicture = styled.img`
-	width : 15rem;
-	height : 25rem;
-	margin-top : 15%;
+	width : 25rem ;
+	height :15rem ;
+	margin-top : 45%;
 	border : 3px solid transparent;
 	&:hover{
 		border : 3px solid ${props => props.theme.colors.primaryGreen};
@@ -60,19 +60,19 @@ align-self : flex-end;
 `;
 
 const Content = styled.div`
-margin-left : 35rem;
-display : flex;
+	margin-left : 35rem;
+	display : flex;
 `;
 
 const GameDetailsCard = styled.div`
-width : 50%;
-min-height : 30rem;
-background-color : blue;
+	width : 50%;
+	min-height : 30rem;
+	background-color : ${props => props.theme.colors.lightGray};	
 `;
 
 const GameRatingCard = styled.div`
-width : 25%;
-background-color:yellow;
+	width : 25%;
+	background-color:yellow;
 
 `;
 
@@ -118,12 +118,16 @@ function Game() {
 					<TitleWrapper>
 						<div> {gameData && gameData.name} </div>
 						<div> Studio : {gameData && gameData.developers.map((developer,i) => developer.name )} </div>
-						<div> {gameData && gameData.genres.map((developer,i) => developer.name )} </div>
+						<div> {gameData && gameData.released} </div>
 					</TitleWrapper>
 				</Wrapper>
 			</CoverPicture>
 			<Content>
-				<GameDetailsCard> { gameData && gameData.description_raw} </GameDetailsCard>
+				<GameDetailsCard> 
+					<h1>Genres : <>{ gameData && gameData.genres.map((genre,i) => genre.name +' ' )}</></h1>
+					<h1>Platfroms : <>{ gameData && gameData.platforms.map((platform,i) => platform.platform.name +' ' )}</></h1>
+					{ gameData && gameData.description_raw}
+				</GameDetailsCard>
 				<GameRatingCard/>
 			</Content>
 		
