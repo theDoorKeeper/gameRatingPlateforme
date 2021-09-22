@@ -144,6 +144,7 @@ function Game() {
 					{ gameData && gameData.description_raw}
 					<Bar/>
 					<h3>Avaible on : <>{ gameData && gameData.stores.map((store,i) => store.store.name +' ' )}</></h3>
+					<h5 style={{color:'grey'}}>Tags: <>{ gameData && gameData.tags.map((tag,i) => tag.name +' ' )}</></h5>
 				</GameDetailsCard>
 				<GameRatingCard/>
 			</Content>
