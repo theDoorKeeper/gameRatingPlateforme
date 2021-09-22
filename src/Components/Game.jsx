@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const Wrapper = styled.div`
 	position : relative;
-	width : 15rem;
+	width : 30rem;
 	height : 20rem;
 	display : flex;
 	justify-content : center;
@@ -22,7 +22,8 @@ const Wrapper = styled.div`
 const GamePicture = styled.img`
 	width : 25rem ;
 	height :15rem ;
-	margin-top : 45%;
+	margin-top : 25%;
+	margin-left :-65%;
 	border : 3px solid transparent;
 	&:hover{
 		border : 3px solid ${props => props.theme.colors.primaryGreen};
@@ -51,19 +52,19 @@ const TitleWrapper = styled.div`
 display : flex;
 flex-direction: column;
 align-self : flex-end;
-text-shadow: 0.01px 0.1px ${props => props.theme.colors.primaryGreen};
+background : ${props => props.theme.colors.transparentBlack};
 & :first-child{
     font-size : ${props => props.theme.fontSizes.large};
-    color : ${props => props.theme.colors.black};
+    color : ${props => props.theme.colors.white};
 };
 & :nth-child(2){
     font-size : ${props => props.theme.fontSizes.medium};
-    color : ${props => props.theme.colors.transparentBlack};
+    color : ${props => props.theme.colors.transparentWhite};
 };  
 
 & :nth-child(3){
     font-size : ${props => props.theme.fontSizes.small};
-    color : ${props => props.theme.colors.transparentBlack};
+    color : ${props => props.theme.colors.transparentWhite};
 };
 
 `;
