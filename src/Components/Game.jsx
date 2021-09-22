@@ -78,11 +78,13 @@ const GameDetailsCard = styled.div`
 	width : 50%;
 	min-height : 30rem;
 	background-color : ${props => props.theme.colors.grey};	
+	border-radius: 0px 25px 0px 25px; /*TL TR BR BL*/
 `;
 
 const GameRatingCard = styled.div`
 	width : 25%;
 	background-color:yellow;
+	border-radius: 25px 0px 25px 0px; /*TL TR BR BL*/
 
 `;
 const Bar = styled.hr`
