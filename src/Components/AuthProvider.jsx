@@ -29,6 +29,7 @@ export function AuthProvider({children}) {
 				profileURL: null,
 				coverURL: null,
 				bio: null,
+				rated : [],
 				followers: [],
 				wishList: [],
 				lists: [],
