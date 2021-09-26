@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useAuth } from './AuthProvider';
 
 
 const Wrapper = styled.div`
@@ -83,7 +84,7 @@ const GameDetailsCard = styled.div`
 
 const GameRatingCard = styled.div`
 	width : 25%;
-	background-color:yellow;
+	background-color : ${props => props.theme.colors.transparentBlack};
 	border-radius: 25px 0px 25px 0px; /*TL TR BR BL*/
 
 `;
@@ -96,7 +97,8 @@ const Bar = styled.hr`
 
 function Game() {
 	const { name } = useParams();
-
+	const {currentUser} = useAuth();
+	
 	const [exists, setExists] = useState(true);
 	const [gameData, setgameData] = useState(null);
 
