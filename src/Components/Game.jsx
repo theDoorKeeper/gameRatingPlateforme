@@ -12,6 +12,7 @@ import {
 	arrayUnion,
 	collection,
 	getDocs,
+	onSnapshot,
 	query,
 	updateDoc,
 	where,
@@ -128,30 +129,28 @@ function Game() {
 			});
 	};
 
-	useEffect(() => {
-		queryGame();
-	}, []);
-
 	const rateGame = async (rating) => {
 		const docRef =  query(
 			collection(db, 'users'),
 			where('uid', '==', currentUser.uid)
 		);
 		
-
 		const docSnap = await getDocs(docRef);
 
 		docSnap.forEach( (doc) => {
 			// doc.data() is never undefined for query doc snapshots
 			updateDoc(doc.ref, {
-				ratings: arrayRemove({...gameData, liked : !rating}),
+				ratings: arrayRemove({name : gameData.name, liked : !rating}),
 			});
 			updateDoc(doc.ref, {
-				ratings: arrayUnion({...gameData, liked : rating}),
+				ratings: arrayUnion({name : gameData.name, liked : rating}),
 			});
 		});
 	};
 
+	useEffect(() => {
+		queryGame();
+	}, []);
 
 	return (
 		<>
