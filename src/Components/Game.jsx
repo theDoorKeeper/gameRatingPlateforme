@@ -110,7 +110,7 @@ function Game() {
 	const [exists, setExists] = useState(true);
 	const [gameData, setgameData] = useState(null);
 	const [ratings , setRatings] = useState({});
-	
+
 	const queryGame = async () => {
 		axios({
 			url: `https://rawg-video-games-database.p.rapidapi.com/games/${name}?key=43d9190ae1bb47f9a9a2276650e8b411`,
@@ -153,7 +153,27 @@ function Game() {
 		queryGame();
 	}, []);
 
-	
+	useEffect(() => {
+		const docQuery = query(collection(db, 'users'), where('ratings', 'array-contains-any',[ {name : gameData.name, liked: true}, {name : gameData.name, liked: false} ]));
+
+		const unsub = onSnapshot(docQuery, (querySnapshot) => {
+			let liked = 0;
+			let disliked = 0;
+
+			querySnapshot.forEach((doc) => {
+				doc.data().ratings.forEach(rating =>{
+					if (rating.name === gameData.name){
+						rating.liked ? liked += 1 : disliked +=1 ;
+					}
+				});
+			});
+
+			setRatings({liked, disliked});
+		});
+
+		return unsub;
+
+	}, []);
 
 	return (
 		<>
