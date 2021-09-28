@@ -109,7 +109,8 @@ function Game() {
 
 	const [exists, setExists] = useState(true);
 	const [gameData, setgameData] = useState(null);
-
+	const [ratings , setRatings] = useState({});
+	
 	const queryGame = async () => {
 		axios({
 			url: `https://rawg-video-games-database.p.rapidapi.com/games/${name}?key=43d9190ae1bb47f9a9a2276650e8b411`,
@@ -151,6 +152,8 @@ function Game() {
 	useEffect(() => {
 		queryGame();
 	}, []);
+
+	
 
 	return (
 		<>
