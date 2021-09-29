@@ -18,6 +18,7 @@ import {
 	where,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import ReviewChart from './Game/ReviewChart';
 
 const Wrapper = styled.div`
   position: relative;
@@ -154,26 +155,24 @@ function Game() {
 	}, []);
 
 	useEffect(() => {
-		const docQuery = query(collection(db, 'users'), where('ratings', 'array-contains-any',[ {name : gameData.name, liked: true}, {name : gameData.name, liked: false} ]));
-
-		const unsub = onSnapshot(docQuery, (querySnapshot) => {
+		const unsub = onSnapshot((collection(db, 'users')), (querySnapshot) => {
 			let liked = 0;
 			let disliked = 0;
 
 			querySnapshot.forEach((doc) => {
 				doc.data().ratings.forEach(rating =>{
-					if (rating.name === gameData.name){
+					if (rating.name && gameData && (rating.name === gameData.name) ){
 						rating.liked ? liked += 1 : disliked +=1 ;
 					}
 				});
 			});
-
+			
 			setRatings({liked, disliked});
 		});
 
 		return unsub;
 
-	}, []);
+	}, [gameData]);
 
 	return (
 		<>
@@ -222,7 +221,9 @@ function Game() {
 						<>{gameData && gameData.tags.map((tag, i) => tag.name + ' ')}</>
 					</h5>
 				</GameDetailsCard>
-				<GameRatingCard/>
+				<GameRatingCard>
+					<ReviewChart reviewData={ratings}/>
+				</GameRatingCard>
 			</Content>
 		</>
 	);
