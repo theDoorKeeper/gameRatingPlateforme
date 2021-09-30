@@ -87,6 +87,7 @@ const Content = styled.div`
 
 const GameDetailsCard = styled.div`
   width: 50%;
+  padding : 10px;
   min-height: 30rem;
   background-color: ${(props) => props.theme.colors.grey};
   border-radius: 0px 25px 0px 25px; /*TL TR BR BL*/
@@ -94,6 +95,7 @@ const GameDetailsCard = styled.div`
 
 const GameRatingCard = styled.div`
   width: 25%;
+  padding : 20px;
   background-color: ${(props) => props.theme.colors.transparentBlack};
   border-radius: 25px 0px 25px 0px; /*TL TR BR BL*/
 `;
@@ -102,6 +104,13 @@ const Bar = styled.hr`
   height: 1px;
   border-width: 0;
   background-color: ${(props) => props.theme.colors.lightGray};
+`;
+const RatingButtonsWrapper = styled.div`
+  display : flex ;
+  width : 100% ;
+  justify-content : space-around;
+  margin-top : 10%;
+
 `;
 
 function Game() {
@@ -223,6 +232,10 @@ function Game() {
 				</GameDetailsCard>
 				<GameRatingCard>
 					<ReviewChart reviewData={ratings}/>
+					<RatingButtonsWrapper>
+						<button onClick={()=>{rateGame(false);}} > Dislike </button>
+						<button onClick={()=>{rateGame(true);}} > Like </button>
+					</RatingButtonsWrapper>
 				</GameRatingCard>
 			</Content>
 		</>
