@@ -34,8 +34,6 @@ const Wrapper = styled.div`
 const GamePicture = styled.img`
   width: 25rem;
   height: 15rem;
-  margin-top: 25%;
-  margin-left: -40%;
   border: 3px solid transparent;
   &:hover {
     border: 3px solid ${(props) => props.theme.colors.primaryGreen};
@@ -58,6 +56,24 @@ const CoverPicture = styled.div`
     z-index: -1;
     filter: blur(10px);
   }
+`;
+const PictureWrapper = styled.div`
+  height: 20rem;
+  margin-top: 25%;
+  margin-left: -40%;
+  display : flex ;
+  flex-direction : column;
+  justify-content : center;
+  align-items : center;
+  gap : 10px;
+`;
+
+const WishListBtn = styled.button`
+ width : 100%;
+ border : none ;
+ cursor : pointer ;
+ background :  ${props => props.theme.colors.lightGray} ;
+ font-size : ${props => props.theme.fontSizes.medium}
 `;
 
 const TitleWrapper = styled.div`
@@ -135,7 +151,7 @@ function Game() {
 				setgameData(response.data);
 			})
 			.catch((err) => {
-				console.error(err);
+				console.log(err);
 				setExists(false);
 			});
 	};
@@ -187,7 +203,10 @@ function Game() {
 		<>
 			<CoverPicture image={gameData && gameData.background_image}>
 				<Wrapper>
-					<GamePicture src={gameData && gameData.background_image_additional} />
+					<PictureWrapper>
+						<GamePicture src={gameData && gameData.background_image_additional} />
+						<WishListBtn>add to wishlist</WishListBtn>
+					</PictureWrapper>
 					<TitleWrapper>
 						<div> {gameData && gameData.name} </div>
 						<div>
@@ -204,17 +223,17 @@ function Game() {
 				<GameDetailsCard>
 					<h3>
             Genres :{' '}
-						<>
+						<div style={{color : 'white'}}>
 							{gameData && gameData.genres.map((genre, i) => genre.name + ' ')}
-						</>
+						</div>
 					</h3>
 					<h3>
             Platfroms :{' '}
-						<>
+						<div style={{color : 'white'}}>
 							{gameData &&
-                gameData.platforms.map(	(platform, i) => platform.platform.name + ', '
+                gameData.platforms.map(	(platform, i) => platform.platform.name + '  '
                 )}
-						</>
+						</div>
 					</h3>
 					{gameData && gameData.description_raw}
 					<Bar />
