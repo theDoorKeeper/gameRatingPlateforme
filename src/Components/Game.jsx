@@ -140,6 +140,7 @@ function Game() {
 	const [exists, setExists] = useState(true);
 	const [gameData, setgameData] = useState(null);
 	const [ratings, setRatings] = useState({});
+	const [rateLoading, setRateLoading] = useState(false);
 	const [hasWishedGame , setHasWishedGame] = useState(false);
 
 	const queryGame = async () => {
