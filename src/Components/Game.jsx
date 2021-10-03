@@ -241,10 +241,16 @@ function Game() {
 		const unsub = onSnapshot(collection(db, 'users'), (querySnapshot) => {
 
 			querySnapshot.forEach((doc) => {
+				let wished = false;
 				doc.data().wishList.forEach((game) => {
 					if ( gameData && game.name === gameData.name) {
 						setHasWishedGame(true);
+						wished = true;
 					}
+					if(!wished){
+						setHasWishedGame(false);
+					}
+
 				});
 			});
 
