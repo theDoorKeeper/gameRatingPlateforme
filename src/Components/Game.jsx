@@ -171,6 +171,7 @@ function Game() {
 		const docSnap = await getDocs(docRef);
 
 		docSnap.forEach((doc) => {
+			setRateLoading(true);
 			// doc.data() is never undefined for query doc snapshots
 			updateDoc(doc.ref, {
 				ratings: arrayRemove({ name: gameData.name, liked: !rating }),
@@ -179,6 +180,8 @@ function Game() {
 				ratings: arrayUnion({ name: gameData.name, liked: rating }),
 			});
 		});
+		setRateLoading(false);
+
 	};
 
 	const wishGame = async () => {
@@ -316,6 +319,7 @@ function Game() {
 					<ReviewChart reviewData={ratings} />
 					<RatingButtonsWrapper>
 						<button
+							disabled={rateLoading}
 							onClick={() => {
 								rateGame(false);
 							}}
@@ -324,6 +328,7 @@ function Game() {
               Dislike{' '}
 						</button>
 						<button
+							disabled={rateLoading}
 							onClick={() => {
 								rateGame(true);
 							}}
