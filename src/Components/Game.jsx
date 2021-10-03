@@ -271,7 +271,7 @@ function Game() {
 						<GamePicture
 							src={gameData && gameData.background_image_additional}
 						/>
-						<WishListBtn onClick={wishGame}>{hasWishedGame ?  'Already wished ': 'add to wishlist'}</WishListBtn>
+						<WishListBtn onClick={wishGame}>{hasWishedGame ?  'Remove from wishList ': 'Add to wishlist'}</WishListBtn>
 					</PictureWrapper>
 					<TitleWrapper>
 						<div> {gameData && gameData.name} </div>
