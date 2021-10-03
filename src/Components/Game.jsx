@@ -194,7 +194,8 @@ function Game() {
 		const docSnap = await getDocs(docRef);
 
 		docSnap.forEach((doc) => {
-			// doc.data() is never undefined for query doc snapshots
+			setWishLoading(true);
+			// in case the user has no items in his wishList
 			if(doc.data().wishList.length === 0){
 				updateDoc(doc.ref, {
 					wishList: arrayUnion({ name: gameData.name }),
@@ -213,9 +214,9 @@ function Game() {
 					});
 				}
 			});
-
+			
 		});
-
+		setWishLoading(false);
 	};
 
 	useEffect(() => {
@@ -272,7 +273,7 @@ function Game() {
 						<GamePicture
 							src={gameData && gameData.background_image_additional}
 						/>
-						<WishListBtn onClick={wishGame}>{hasWishedGame ?  'Remove from wishList ': 'Add to wishlist'}</WishListBtn>
+						<WishListBtn onClick={wishGame} disabled={wishLoading}>{hasWishedGame ?  'Remove from wishList ': 'Add to wishlist'}</WishListBtn>
 					</PictureWrapper>
 					<TitleWrapper>
 						<div> {gameData && gameData.name} </div>
