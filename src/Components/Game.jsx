@@ -206,11 +206,11 @@ function Game() {
 			doc.data().wishList.forEach((game) => {
 				if (game.name === gameData.name) {
 					updateDoc(doc.ref, {
-						wishList: arrayRemove({ name: gameData.name }),
+						wishList: arrayRemove({ name: gameData.name, picture : gameData.background_image }),
 					});
 				} else {
 					updateDoc(doc.ref, {
-						wishList: arrayUnion({ name: gameData.name }),
+						wishList: arrayUnion({ name: gameData.name, picture : gameData.background_image }),
 					});
 				}
 			});
