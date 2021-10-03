@@ -61,19 +61,24 @@ const PictureWrapper = styled.div`
   height: 20rem;
   margin-top: 25%;
   margin-left: -40%;
-  display : flex ;
-  flex-direction : column;
-  justify-content : center;
-  align-items : center;
-  gap : 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 `;
 
 const WishListBtn = styled.button`
- width : 100%;
- border : none ;
- cursor : pointer ;
- background :  ${props => props.theme.colors.lightGray} ;
- font-size : ${props => props.theme.fontSizes.medium}
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  color : ${(props) => props.theme.colors.lightGray};
+  background: black ;
+  font-size: ${(props) => props.theme.fontSizes.medium};
+  &:hover{
+	color : ${(props) => props.theme.colors.primaryGreen};
+	border: ${(props) => props.theme.colors.primaryGreen} 1px solid ;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -103,7 +108,7 @@ const Content = styled.div`
 
 const GameDetailsCard = styled.div`
   width: 50%;
-  padding : 10px;
+  padding: 10px;
   min-height: 30rem;
   background-color: ${(props) => props.theme.colors.grey};
   border-radius: 0px 25px 0px 25px; /*TL TR BR BL*/
@@ -111,7 +116,7 @@ const GameDetailsCard = styled.div`
 
 const GameRatingCard = styled.div`
   width: 25%;
-  padding : 20px;
+  padding: 20px;
   background-color: ${(props) => props.theme.colors.transparentBlack};
   border-radius: 25px 0px 25px 0px; /*TL TR BR BL*/
 `;
@@ -122,11 +127,10 @@ const Bar = styled.hr`
   background-color: ${(props) => props.theme.colors.lightGray};
 `;
 const RatingButtonsWrapper = styled.div`
-  display : flex ;
-  width : 100% ;
-  justify-content : space-around;
-  margin-top : 10%;
-
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 10%;
 `;
 
 function Game() {
@@ -135,7 +139,7 @@ function Game() {
 
 	const [exists, setExists] = useState(true);
 	const [gameData, setgameData] = useState(null);
-	const [ratings , setRatings] = useState({});
+	const [ratings, setRatings] = useState({});
 
 	const queryGame = async () => {
 		axios({
@@ -157,20 +161,46 @@ function Game() {
 	};
 
 	const rateGame = async (rating) => {
-		const docRef =  query(
+		const docRef = query(
 			collection(db, 'users'),
 			where('uid', '==', currentUser.uid)
 		);
-		
+
 		const docSnap = await getDocs(docRef);
 
-		docSnap.forEach( (doc) => {
+		docSnap.forEach((doc) => {
 			// doc.data() is never undefined for query doc snapshots
 			updateDoc(doc.ref, {
-				ratings: arrayRemove({name : gameData.name, liked : !rating}),
+				ratings: arrayRemove({ name: gameData.name, liked: !rating }),
 			});
 			updateDoc(doc.ref, {
-				ratings: arrayUnion({name : gameData.name, liked : rating}),
+				ratings: arrayUnion({ name: gameData.name, liked: rating }),
+			});
+		});
+	};
+
+	const wishGame = async () => {
+		const docRef = query(
+			collection(db, 'users'),
+			where('uid', '==', currentUser.uid)
+		);
+
+		const docSnap = await getDocs(docRef);
+
+		docSnap.forEach((doc) => {
+			// doc.data() is never undefined for query doc snapshots
+			doc.data().wishList.forEach((game) => {
+				let exists = true;
+				if (game.name === gameData.name) {
+					updateDoc(doc.ref, {
+						wishList: arrayRemove({ name: gameData.name }),
+					});
+					exists = false;
+				} else if (!exists) {
+					updateDoc(doc.ref, {
+						ratings: arrayUnion({ name: gameData.name }),
+					});
+				}
 			});
 		});
 	};
@@ -180,23 +210,22 @@ function Game() {
 	}, []);
 
 	useEffect(() => {
-		const unsub = onSnapshot((collection(db, 'users')), (querySnapshot) => {
+		const unsub = onSnapshot(collection(db, 'users'), (querySnapshot) => {
 			let liked = 0;
 			let disliked = 0;
 
 			querySnapshot.forEach((doc) => {
-				doc.data().ratings.forEach(rating =>{
-					if (rating.name && gameData && (rating.name === gameData.name) ){
-						rating.liked ? liked += 1 : disliked +=1 ;
+				doc.data().ratings.forEach((rating) => {
+					if (rating.name && gameData && rating.name === gameData.name) {
+						rating.liked ? (liked += 1) : (disliked += 1);
 					}
 				});
 			});
-			
-			setRatings({liked, disliked});
+
+			setRatings({ liked, disliked });
 		});
 
 		return unsub;
-
 	}, [gameData]);
 
 	return (
@@ -204,7 +233,9 @@ function Game() {
 			<CoverPicture image={gameData && gameData.background_image}>
 				<Wrapper>
 					<PictureWrapper>
-						<GamePicture src={gameData && gameData.background_image_additional} />
+						<GamePicture
+							src={gameData && gameData.background_image_additional}
+						/>
 						<WishListBtn>add to wishlist</WishListBtn>
 					</PictureWrapper>
 					<TitleWrapper>
@@ -223,15 +254,15 @@ function Game() {
 				<GameDetailsCard>
 					<h3>
             Genres :{' '}
-						<div style={{color : 'white'}}>
+						<div style={{ color: 'white' }}>
 							{gameData && gameData.genres.map((genre, i) => genre.name + ' ')}
 						</div>
 					</h3>
 					<h3>
             Platfroms :{' '}
-						<div style={{color : 'white'}}>
+						<div style={{ color: 'white' }}>
 							{gameData &&
-                gameData.platforms.map(	(platform, i) => platform.platform.name + '  '
+                gameData.platforms.map((platform, i) => platform.platform.name + '  '
                 )}
 						</div>
 					</h3>
@@ -250,10 +281,24 @@ function Game() {
 					</h5>
 				</GameDetailsCard>
 				<GameRatingCard>
-					<ReviewChart reviewData={ratings}/>
+					<ReviewChart reviewData={ratings} />
 					<RatingButtonsWrapper>
-						<button onClick={()=>{rateGame(false);}} > Dislike </button>
-						<button onClick={()=>{rateGame(true);}} > Like </button>
+						<button
+							onClick={() => {
+								rateGame(false);
+							}}
+						>
+							{' '}
+              Dislike{' '}
+						</button>
+						<button
+							onClick={() => {
+								rateGame(true);
+							}}
+						>
+							{' '}
+              Like{' '}
+						</button>
 					</RatingButtonsWrapper>
 				</GameRatingCard>
 			</Content>
