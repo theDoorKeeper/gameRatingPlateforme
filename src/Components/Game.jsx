@@ -190,20 +190,27 @@ function Game() {
 
 		docSnap.forEach((doc) => {
 			// doc.data() is never undefined for query doc snapshots
+			if(doc.data().wishList.length === 0){
+				updateDoc(doc.ref, {
+					wishList: arrayUnion({ name: gameData.name }),
+				});
+			}
+
+
 			doc.data().wishList.forEach((game) => {
-				let exists = true;
 				if (game.name === gameData.name) {
 					updateDoc(doc.ref, {
 						wishList: arrayRemove({ name: gameData.name }),
 					});
-					exists = false;
-				} else if (!exists) {
+				} else {
 					updateDoc(doc.ref, {
-						ratings: arrayUnion({ name: gameData.name }),
+						wishList: arrayUnion({ name: gameData.name }),
 					});
 				}
 			});
+
 		});
+
 	};
 
 	useEffect(() => {
@@ -254,7 +261,7 @@ function Game() {
 						<GamePicture
 							src={gameData && gameData.background_image_additional}
 						/>
-						<WishListBtn>{hasWishedGame ?  'Already wished ': 'add to wishlist'}</WishListBtn>
+						<WishListBtn onClick={wishGame}>{hasWishedGame ?  'Already wished ': 'add to wishlist'}</WishListBtn>
 					</PictureWrapper>
 					<TitleWrapper>
 						<div> {gameData && gameData.name} </div>
