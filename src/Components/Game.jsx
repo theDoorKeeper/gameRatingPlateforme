@@ -229,6 +229,23 @@ function Game() {
 		return unsub;
 	}, [gameData]);
 
+
+	useEffect(() => {
+		const unsub = onSnapshot(collection(db, 'users'), (querySnapshot) => {
+
+			querySnapshot.forEach((doc) => {
+				doc.data().wishList.forEach((game) => {
+					if ( gameData && game.name === gameData.name) {
+						setHasWishedGame(true);
+					}
+				});
+			});
+
+		});
+
+		return unsub;
+	}, [gameData]);
+
 	return (
 		<>
 			<CoverPicture image={gameData && gameData.background_image}>
