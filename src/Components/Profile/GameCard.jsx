@@ -4,27 +4,34 @@ import styled from 'styled-components';
 
 const Card = styled.div`
 	width : 40%;
-	background : ${props => props.theme.colors.lightGray};
 	color : ${props => props.theme.colors.white};
-	display : flex;
-	gap : 8px;
+	border-radius : 8px;
 `;
 
 const GameImage = styled.img`
-	width : 60%;
+	min-width : 100%;
 	height : 10em;
 	background : red;
+	cursor : pointer;
+	border-radius : 8px;
 	&:hover{
-		filter:blur(8);
+	  backdrop-filter: blur(10px);
+      filter: blur(4px);
+      transition: 0.5s ease;
 	}
 `;
 
 const GameInfo = styled.div`
-	width : 40%;
+	position : relative;
+	max-width : fit-content;
+	top : -45%;
+	text-align : center;
 	color : ${props => props.theme.colors.transparentWhite};
-	background : ${props => props.theme.colors.transparentBlack};
-	display : flex;
-	flex-direction : column;
+	font-size : ${props => props.theme.fontSizes.large};
+	cursor : pointer;
+	&:hover{
+		color : ${props => props.theme.colors.primaryGreen};
+	}
 `;	
 function GameCard(props) {
 	const {image, title} = props;
