@@ -13,7 +13,7 @@ const Card = styled.div`
 const GameImage = styled.img`
 	min-width : 100%;
 	height : 10em;
-	background : red;
+	background : ${props => props.theme.colors.transparentBlack};;
 	cursor : pointer;
 	border-radius : 8px;
 	&:hover{
