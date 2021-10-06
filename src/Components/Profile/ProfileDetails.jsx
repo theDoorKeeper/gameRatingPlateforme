@@ -11,7 +11,7 @@ import Navbar from './Navbar';
 const Container = styled.div`
 	  width : 100%;
 	  margin : auto;
-	  height: 50rem; ;
+	  min-height: 50rem; ;
 	  background-color : ${props => props.theme.colors.lightGray};	
 	  display : flex;
 	  flex-direction : column;
@@ -29,7 +29,7 @@ const NavbarContainer = styled.div`
 
 const Content = styled.div`
 	width : 50%;
-	height : 30rem;
+	min-height : 30rem;
 	background-color : ${props => props.theme.colors.transparentBlack};
 `;
 function ProfileDetails(props) {
