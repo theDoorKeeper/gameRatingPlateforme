@@ -7,12 +7,17 @@ import GameCard from './GameCard';
 
 const WishedWrapper = styled.div`
 	width : 100%;
-	gap : 5px;
+	gap : 15px;
 	display : flex;
 	flex-wrap : wrap;
 	justify-content : center; 
 `;
-
+const Title = styled.div`
+	font-size : ${props => props.theme.fontSizes.large};
+	color : ${props => props.theme.colors.white};
+	max-width : fit-content;
+	margin : auto;
+`;
 function Lists(props) {
 	const {user, notUser} = props;
 	const [wishedArray, setWishedArray] = useState([]);
@@ -23,7 +28,7 @@ function Lists(props) {
 	}, [user]);
 	return (
 		<div>
-			Wished games :
+			<Title>Wished games :</Title>
 			<WishedWrapper>
 				{wishedArray}
 			</WishedWrapper> 
