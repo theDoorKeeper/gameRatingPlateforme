@@ -19,7 +19,7 @@ const GameImage = styled.img`
 	&:hover{
 	  backdrop-filter: blur(10px);
       filter: blur(4px);
-      transition: 0.5s ease;
+      transition: 0.2s ease;
 	}
 `;
 
@@ -38,13 +38,17 @@ const GameInfo = styled.div`
 function GameCard(props) {
 	const {image, title} = props;
 	let history = useHistory();
+
+	const gotoGamepage = ()=>{
+		history.push(`/Game/${title.split(' ').join('-')}`);
+	};
 	
 
 
 	return (
 		<Card>
 			<GameImage src={image}/>
-			<GameInfo>
+			<GameInfo onClick={gotoGamepage}>
 				{title}
 			</GameInfo>
 		</Card>
