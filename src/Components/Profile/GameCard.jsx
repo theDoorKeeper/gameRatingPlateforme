@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -25,11 +26,13 @@ const GameInfo = styled.div`
 	display : flex;
 	flex-direction : column;
 `;	
-function GameCard() {
+function GameCard(props) {
+	const {image, title} = props;
 	return (
 		<Card>
-			<GameImage />
+			<GameImage src={image}/>
 			<GameInfo>
+				{title}
 			</GameInfo>
 		</Card>
 	);
