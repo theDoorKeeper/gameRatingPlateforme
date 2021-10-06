@@ -44,7 +44,7 @@ function ProfileDetails(props) {
 				</NavbarContainer>
 				<Content>
 					<Route  exact path={path} > <Bio user={user} notUser={notUser}/> </Route>	
-					<Route path={`${path}/Lists`} > <Lists/> </Route>
+					<Route path={`${path}/Lists`} > <Lists user={user} notUser={notUser}/> </Route>
 					<Route path={`${path}/Followers`} > <Followers/> </Route>
 				</Content>
 			</Container>
