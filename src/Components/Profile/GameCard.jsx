@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -35,6 +37,10 @@ const GameInfo = styled.div`
 `;	
 function GameCard(props) {
 	const {image, title} = props;
+	let history = useHistory();
+	
+
+
 	return (
 		<Card>
 			<GameImage src={image}/>
