@@ -23,7 +23,7 @@ function Lists(props) {
 	const [wishedArray, setWishedArray] = useState([]);
 
 	useEffect(() => {
-		setWishedArray( user.wishList.map( game => <GameCard  title={game.name} image={game.picture} key={game.name} /> ) );
+		user.wishList &&  setWishedArray( user.wishList.map( game => <GameCard  title={game.name} image={game.picture} key={game.name} /> ) );
 		
 	}, [user]);
 	return (
