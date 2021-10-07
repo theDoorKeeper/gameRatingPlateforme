@@ -31,7 +31,11 @@ function Navbar(props) {
 			</li>
 
 			<li>
-				<StyledLink  to={`${url}/Lists`}>Lists</StyledLink>
+				<StyledLink  to={`${url}/Wishlist`}>Wishlist</StyledLink>
+			</li>
+
+			<li>
+				<StyledLink  to={`${url}/Rated games`}>Rated Games</StyledLink>
 			</li>
 
 			<li>
