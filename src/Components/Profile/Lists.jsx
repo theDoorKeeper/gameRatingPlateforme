@@ -19,18 +19,18 @@ const Title = styled.div`
 	margin : auto;
 `;
 function Lists(props) {
-	const {user, notUser} = props;
-	const [wishedArray, setWishedArray] = useState([]);
+	const {list} = props;
+	const [gameArray, setgameArray] = useState([]);
 
 	useEffect(() => {
-		user.wishList &&  setWishedArray( user.wishList.map( game => <GameCard  title={game.name} image={game.picture} key={game.name} /> ) );
+		list &&  setgameArray( list.map( game => <GameCard  title={game.name} image={game.picture} key={game.name} /> ) );
 		
-	}, [user]);
+	}, [list]);
 	return (
 		<div>
 			<Title>Wished games :</Title>
 			<WishedWrapper>
-				{wishedArray}
+				{gameArray}
 			</WishedWrapper> 
 		</div>
 	);
