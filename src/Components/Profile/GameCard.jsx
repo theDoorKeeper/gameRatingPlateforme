@@ -43,8 +43,11 @@ function GameCard(props) {
 	const [ratingState, setRatingState] = useState('');
 	
 	useEffect(() => {
-		rating ? setRatingState('Liked') : setRatingState('Disliked');
-		
+		if(typeof(rating) === 'boolean'){
+			rating ? setRatingState('Liked') : setRatingState('Disliked');
+			
+		}
+		console.log(typeof(rating));
 	}, [rating]);
 
 	const gotoGamepage = ()=>{
@@ -59,7 +62,7 @@ function GameCard(props) {
 			<GameInfo onClick={gotoGamepage}>
 				{title}
 			</GameInfo>
-			{ rating && ratingState}
+			{ ratingState}
 		</Card>
 	);
 }
