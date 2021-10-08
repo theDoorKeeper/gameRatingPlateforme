@@ -175,10 +175,10 @@ function Game() {
 			setRateLoading(true);
 			// doc.data() is never undefined for query doc snapshots
 			updateDoc(doc.ref, {
-				ratings: arrayRemove({ name: gameData.name, liked: !rating }),
+				ratings: arrayRemove({ name: gameData.name, liked: !rating, picture : gameData.background_image }),
 			});
 			updateDoc(doc.ref, {
-				ratings: arrayUnion({ name: gameData.name, liked: rating }),
+				ratings: arrayUnion({ name: gameData.name, liked: rating, picture : gameData.background_image }),
 			});
 		});
 		setRateLoading(false);
@@ -198,7 +198,7 @@ function Game() {
 			// in case the user has no items in his wishList
 			if(doc.data().wishList.length === 0){
 				updateDoc(doc.ref, {
-					wishList: arrayUnion({ name: gameData.name }),
+					wishList: arrayUnion({ name: gameData.name, picture : gameData.background_image }),
 				});
 			}
 
