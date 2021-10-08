@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -39,8 +40,13 @@ const GameInfo = styled.div`
 function GameCard(props) {
 	const {image, title, rating} = props;
 	let history = useHistory();
-	const [ratingState, setRatingState] = useState();
+	const [ratingState, setRatingState] = useState('');
 	
+	useEffect(() => {
+		rating ? setRatingState('Liked') : setRatingState('Disliked');
+		
+	}, [rating]);
+
 	const gotoGamepage = ()=>{
 		history.push(`/Game/${title.split(' ').join('-')}`);
 	};
@@ -53,7 +59,7 @@ function GameCard(props) {
 			<GameInfo onClick={gotoGamepage}>
 				{title}
 			</GameInfo>
-			{ rating && 'test'}
+			{ rating && ratingState}
 		</Card>
 	);
 }
