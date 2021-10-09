@@ -167,17 +167,27 @@ function ProfileImages(props) {
 		if (user){
 			setCoverLoading(true);
 			setProfileLoading(true);
-			getDownloadURL(coverStorageRef).then((url) => {	
-				setCoverUrl(url);
-				setCoverLoading(false);
-			});
 
+			getDownloadURL(coverStorageRef)
+				.then((url) => {	
+					setCoverUrl(url);
+					setCoverLoading(false);
+				})
+				.catch((error)=>{
+					console.log(error.message);
+					setCoverLoading(false);
 
-			getDownloadURL(profileStorageRef).then((url) => {
-				setProfileUrl(url);
-				setProfileLoading(false);
-				console.log(profileUrl);
-			});
+				});
+
+			getDownloadURL(profileStorageRef)
+				.then((url) => {
+					setProfileUrl(url);
+					setProfileLoading(false);
+				})				.catch((error)=>{
+					console.log(error.message);
+					setProfileLoading(false);
+
+				});
 		}
 
 	},[user]);
