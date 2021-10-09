@@ -244,26 +244,30 @@ function Game() {
 
 
 	useEffect(() => {
-		const unsub = onSnapshot(collection(db, 'users'), (querySnapshot) => {
+		if(currentUser)	{		
+			const q = query(collection(db, 'users'), where('uid', '==', currentUser.uid));
 
-			querySnapshot.forEach((doc) => {
-				let wished = false;
-				doc.data().wishList.forEach((game) => {
-					if ( gameData && game.name === gameData.name) {
-						setHasWishedGame(true);
-						wished = true;
-					}
-					if(!wished){
-						setHasWishedGame(false);
-					}
+			const unsub = onSnapshot(q, (querySnapshot) => {
 
+				querySnapshot.forEach((doc) => {
+					let wished = false;
+					doc.data().wishList.forEach((game) => {
+						if ( gameData && game.name === gameData.name) {
+							setHasWishedGame(true);
+							wished = true;
+						}
+						if(!wished){
+							setHasWishedGame(false);
+						}
+
+					});
 				});
+
 			});
 
-		});
-
-		return unsub;
-	}, [gameData]);
+			return unsub;
+		}
+	}, [gameData,currentUser]);
 
 	return (
 		<>
