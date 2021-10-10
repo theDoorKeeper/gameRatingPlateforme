@@ -75,7 +75,37 @@ function ProfileDetails(props) {
 			});
 		});
 	};
+	const addToFollowers = async()=>{
+		// adds the currentUser  to the target user's followers Array
+		const docRef = query(
+			collection(db, 'users'),
+			where('uid', '==', user.uid)
+		);
 
+		const docSnap = await getDocs(docRef);
+
+		docSnap.forEach((doc) => {
+			// in case the user doesn't have any followers
+			if (doc.data().followers.length === 0) {
+				updateDoc(doc.ref, {
+					followers: arrayUnion({ name: currentUser.name, uid: currentUser.uid }),
+				});
+			}
+
+			doc.data().followers.forEach((follower) => {
+				if (follower.uid === currentUser.uid) {
+					updateDoc(doc.ref, {
+						followers: arrayRemove({ name: currentUser.name, uid: currentUser.uid }),
+					});
+				} else {
+					updateDoc(doc.ref, {
+						followers: arrayUnion({ name: currentUser.name, uid: currentUser.uid }),
+					});
+				}
+			});
+		});
+
+	};
 	return (
 		<>
 			<Container>
