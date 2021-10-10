@@ -56,25 +56,26 @@ function ProfileDetails(props) {
 
 		docSnap.forEach((doc) => {
 			// in case the user has not followed anyone yet
-			if (doc.data().followed.length === 0) {
+			if (doc.data().following.length === 0) {
 				updateDoc(doc.ref, {
-					followed: arrayUnion({ name: user.name, uid: user.uid }),
+					following: arrayUnion( user.uid ),
 				});
 			}
 
-			doc.data().followed.forEach((followedUser) => {
-				if (followedUser.uid === user.uid) {
+			doc.data().following.forEach((followedUser) => {
+				if (followedUser === user.uid) {
 					updateDoc(doc.ref, {
-						followed: arrayRemove({ name: user.name, uid: user.uid }),
+						following: arrayRemove( user.uid ),
 					});
 				} else {
 					updateDoc(doc.ref, {
-						followed: arrayUnion({ name: user.name, uid: user.uid }),
+						following: arrayUnion( user.uid ),
 					});
 				}
 			});
 		});
 	};
+
 	const addToFollowers = async()=>{
 		// adds the currentUser  to the target user's followers Array
 		const docRef = query(
@@ -88,23 +89,28 @@ function ProfileDetails(props) {
 			// in case the user doesn't have any followers
 			if (doc.data().followers.length === 0) {
 				updateDoc(doc.ref, {
-					followers: arrayUnion({ name: currentUser.name, uid: currentUser.uid }),
+					followers: arrayUnion( currentUser.uid ),
 				});
 			}
 
 			doc.data().followers.forEach((follower) => {
-				if (follower.uid === currentUser.uid) {
+				if (follower === currentUser.uid) {
 					updateDoc(doc.ref, {
-						followers: arrayRemove({ name: currentUser.name, uid: currentUser.uid }),
+						followers: arrayRemove( currentUser.uid ),
 					});
 				} else {
 					updateDoc(doc.ref, {
-						followers: arrayUnion({ name: currentUser.name, uid: currentUser.uid }),
+						followers: arrayUnion( currentUser.uid ),
 					});
 				}
 			});
 		});
 
+	};
+
+	const FollowUser =()=>{
+		addToFollowed();
+		addToFollowers();
 	};
 	return (
 		<>
