@@ -65,7 +65,7 @@ function User() {
 		<>
 			{userData && <Content>
 				<ProfileImages  user={userData} ready={!loading} notUser={notUser}/>
-				<ProfileDetails path={path} url={url} user={userData} ready={!loading}  notUser={notUser}/>
+				<ProfileDetails path={path} url={url} user={userData} ready={!loading}  notUser={notUser} name={name}/>
 			</Content>}
 		</>
 	);
