@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { arrayRemove, arrayUnion, collection, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import React from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { db } from '../../firebase';
 import Bio from './Bio';
 import Followers from './Followers';
 import Lists from './Lists';
@@ -34,7 +36,8 @@ const Content = styled.div`
 `;
 function ProfileDetails(props) {
 
-	const {path, url, user, notUser} = props;
+	const {path, url, user, notUser, name, currentUser} = props;
+
 
 	return (
 		<>
