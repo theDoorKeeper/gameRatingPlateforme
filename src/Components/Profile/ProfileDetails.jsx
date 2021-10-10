@@ -45,6 +45,36 @@ const Content = styled.div`
 function ProfileDetails(props) {
 	const { path, url, user, notUser, currentUser } = props;
 
+	const addToFollowed = async () => {
+		// adds the target user to the currentUsers' followed Array
+		const docRef = query(
+			collection(db, 'users'),
+			where('uid', '==', currentUser.uid)
+		);
+
+		const docSnap = await getDocs(docRef);
+
+		docSnap.forEach((doc) => {
+			// in case the user has not followed anyone yet
+			if (doc.data().followed.length === 0) {
+				updateDoc(doc.ref, {
+					followed: arrayUnion({ name: user.name, uid: user.uid }),
+				});
+			}
+
+			doc.data().followed.forEach((followedUser) => {
+				if (followedUser.uid === user.uid) {
+					updateDoc(doc.ref, {
+						followed: arrayRemove({ name: user.name, uid: user.uid }),
+					});
+				} else {
+					updateDoc(doc.ref, {
+						followed: arrayUnion({ name: user.name, uid: user.uid }),
+					});
+				}
+			});
+		});
+	};
 
 	return (
 		<>
