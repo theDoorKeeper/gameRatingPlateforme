@@ -7,6 +7,7 @@ import ProfileDetails from './Profile/ProfileDetails';
 import ProfileImages from './Profile/ProfileImages';
 import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useAuth } from './AuthProvider';
 
 
 const Content = styled.div`
@@ -19,7 +20,7 @@ function User() {
 	const [userData, setuserData] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [notUser, setNotUser] = useState(true);
-
+	const {currentUser} = useAuth();
 	let { path, url } = useRouteMatch();
 
 
@@ -65,7 +66,7 @@ function User() {
 		<>
 			{userData && <Content>
 				<ProfileImages  user={userData} ready={!loading} notUser={notUser}/>
-				<ProfileDetails path={path} url={url} user={userData} ready={!loading}  notUser={notUser} name={name}/>
+				<ProfileDetails path={path} url={url} user={userData} ready={!loading}  notUser={notUser} name={name} currentUser={currentUser}/>
 			</Content>}
 		</>
 	);
