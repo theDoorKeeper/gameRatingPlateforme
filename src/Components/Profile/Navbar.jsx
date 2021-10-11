@@ -7,6 +7,7 @@ const Nav = styled.ul`
     list-style : none ;
     display : flex;
     gap : 2rem;
+	width : 80%;
 `;
 
 const StyledLink = styled(NavLink)`
@@ -21,8 +22,33 @@ const StyledLink = styled(NavLink)`
 
 `;
 
+const FollowButton = styled.button`
+	width : 5rem;
+ 	border : none ;
+    background : ${props => props.theme.colors.backgroundBlack};
+    color : ${props => props.theme.colors.white};
+    cursor : pointer;
+    &:hover{
+     border : 1px solid ${props => props.theme.colors.primaryGreen};
+     color : ${props => props.theme.colors.primaryGreen};
+    }
+    &:disabled{
+        color : ${props => props.theme.colors.lightGrey};
+        background : ${props => props.theme.colors.backgroundGray};
+        &:hover{
+     border : none;
+     color : ${props => props.theme.colors.lightGrey};
+    }
+    }
+
+`;
+
+const StyledLi = styled.li`
+	 margin-left: auto;
+`;
+
 function Navbar(props) {
-	const {url} = props;
+	const {url, notUser, follow, isFollowed} = props;
 
 	return (
 		<Nav>
@@ -41,6 +67,9 @@ function Navbar(props) {
 			<li>
 				<StyledLink to={`${url}/Followers`}>Followers</StyledLink>
 			</li>
+			<StyledLi>
+				{notUser && <FollowButton onClick={follow}> {isFollowed ? 'unfollow - ' : 'follow+'} </FollowButton>}
+			</StyledLi>
 		</Nav>
 	);
 }
