@@ -44,6 +44,7 @@ const Content = styled.div`
   min-height: 30rem;
   background-color: ${(props) => props.theme.colors.transparentBlack};
 `;
+
 function ProfileDetails(props) {
 	const { path, url, user, notUser, currentUser } = props;
 	const [isFollowed ,setIsFollowed] = useState(false);
@@ -119,7 +120,7 @@ function ProfileDetails(props) {
 
 	useEffect(() => {
 		//checking if the array is empty , becayse the opperatiob below this one wont run and the isFollowed state wont turn to false if the array is empty
-		user.followers.length < 1 ? setIsFollowed(false) : null ;
+		user.followers  && user.followers.length < 1 ? setIsFollowed(false) : null ;
 
 
 		user.followers && user.followers.forEach(follower=>{
@@ -131,9 +132,8 @@ function ProfileDetails(props) {
 	return (
 		<>
 			<Container>
-				{notUser && <button onClick={FollowUser}>{isFollowed ? 'unfollow' : 'follow'}</button>}
 				<NavbarContainer>
-					<Navbar url={url} />
+					<Navbar url={url} follow={FollowUser} notUser={notUser} isFollowed={isFollowed}/>
 				</NavbarContainer>
 				<Content>
 					<Route exact path={path}>
