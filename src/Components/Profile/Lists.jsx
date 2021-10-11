@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import GameCard from './GameCard';
 
 const WishedWrapper = styled.div`
+	padding-top : 2rem;
 	width : 100%;
 	gap : 15px;
 	display : flex;
@@ -23,16 +24,15 @@ function Lists(props) {
 	const [gameArray, setgameArray] = useState([]);
 
 	useEffect(() => {
-		list &&  setgameArray( list.map( game => <GameCard  title={game.name} image={game.picture} key={game.name} /> ) );
-		
+		list &&  setgameArray( list.map( game => <GameCard  title={game.name} image={game.picture} rating={game.liked} key={game.name} /> ) );
 	}, [list]);
+
 	return (
-		<div>
-			<Title>Wished games :</Title>
-			<WishedWrapper>
-				{gameArray}
-			</WishedWrapper> 
-		</div>
+
+		<WishedWrapper>
+			{gameArray}
+		</WishedWrapper> 
+
 	);
 }
 

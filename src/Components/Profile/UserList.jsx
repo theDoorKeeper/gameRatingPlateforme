@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import UserCard from './UserCard';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 
 const ListWrapper = styled.div`
 	padding-top : 2rem;
@@ -13,13 +16,42 @@ const ListWrapper = styled.div`
 	flex-wrap : wrap;
 	justify-content : center; 
 `;
-function GameList(props) {
+
+function UserList(props) {
 	const {list} = props;
 	const [array, setArray] = useState([]);
+	const [userArray, setUserArray] = useState([]);
 
 	useEffect(() => {
-		list &&  setArray( list.map( user => <UserCard  title={user.name} image={user.picture} key={user.uid} /> ) );
+		
+		
+		const getList =async()=>{
+			const tempArray = [];
+			if(list){
+				for  (let i = 0; i < list.length; i++){
+					//used for loop instead of forEach to avoid async issues 
+					const uid = list[i];
+					const usersRef = collection(db, 'users');
+					const q = query(usersRef, where('uid', '==', uid));
+	
+					const querySnapshot = await getDocs(q);
+					querySnapshot.forEach((doc) => {
+						// doc.data() is never undefined for query doc snapshots
+						tempArray.push(doc.data());
+					});	
+					
+				}}
+			setUserArray(tempArray);
+		};
+		getList();
+
+	
 	}, [list]);
+
+	useEffect(() => {
+		console.log(userArray);
+		setArray( userArray.map( user => <UserCard  title={user.name} image={user.picture} key={user.uid} /> ) );
+	}, [userArray]);
 
 	return (
 
@@ -30,4 +62,4 @@ function GameList(props) {
 	);
 }
 
-export default GameList;
+export default UserList;

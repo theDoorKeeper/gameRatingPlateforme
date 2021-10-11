@@ -16,9 +16,9 @@ import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import { db } from '../../firebase';
 import Bio from './Bio';
-import Followers from './Followers';
 import Lists from './Lists';
 import Navbar from './Navbar';
+import UserList from './UserList';
 
 const Container = styled.div`
   width: 100%;
@@ -150,7 +150,7 @@ function ProfileDetails(props) {
 					</Route>
 					<Route path={`${path}/Followers`}>
 						{' '}
-						<Followers />{' '}
+						<UserList list={user.followers} />{' '}
 					</Route>
 				</Content>
 			</Container>
