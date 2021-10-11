@@ -10,6 +10,7 @@ import {
 	where,
 } from 'firebase/firestore';
 import React from 'react';
+import { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
@@ -110,14 +111,27 @@ function ProfileDetails(props) {
 
 	};
 
+
 	const FollowUser =()=>{
 		addToFollowed();
 		addToFollowers();
 	};
+
+	useEffect(() => {
+		//checking if the array is empty , becayse the opperatiob below this one wont run and the isFollowed state wont turn to false if the array is empty
+		user.followers.length < 1 ? setIsFollowed(false) : null ;
+
+
+		user.followers && user.followers.forEach(follower=>{
+			follower === currentUser.uid ? setIsFollowed(true) : setIsFollowed(false);
+		});
+
+	}, [user]);
+
 	return (
 		<>
 			<Container>
-				{notUser && <button onClick={FollowUser}>follow</button>}
+				{notUser && <button onClick={FollowUser}>{isFollowed ? 'unfollow' : 'follow'}</button>}
 				<NavbarContainer>
 					<Navbar url={url} />
 				</NavbarContainer>
