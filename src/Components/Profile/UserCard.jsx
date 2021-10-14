@@ -4,46 +4,188 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeInMove = keyframes`
+  0% {
+    opacity: 0;
+    left: -300px;
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+`; 
+
+const fadeIn = keyframes`
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+`; 
+
+const mvTop = keyframes`
+  0% {top: -150px;}
+  100% {top: 40px;}
+`;
+
+const dsTopAnim = keyframes`
+0% {top: -150px;}
+100% {top: 0;}
+`;
 
 const Card = styled.div`
-	width : 40%;
-	color : ${props => props.theme.colors.white};
-	border-radius : 8px;
+  position: absolute;
+  width: 250px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
+  background: #151515;
+  overflow: hidden;
 `;
 
-const GameImage = styled.img`
-	min-width : 40%;
-	height : 40%;
-	background : ${props => props.theme.colors.transparentBlack};
-	cursor : pointer;
-	border-radius : 8px;
-	&:hover{
-	  backdrop-filter: blur(10px);
-      filter: blur(4px);
-      transition: 0.2s ease;
-	}
+const DsTop = styled.img`
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 300px;
+    height: 80px;
+    background: ${props=>props.theme.colors.primaryGreen};
+    animation: ${dsTopAnim} 1.5s;
 `;
 
-const UserName = styled.div`
-/* 	position : relative; */
-	min-width : 100%;
-/* 	top : -45%; */
-	text-align : center;
-	color : ${props => props.theme.colors.transparentWhite};
-	font-size : ${props => props.theme.fontSizes.large};
-	cursor : pointer;
-	&:hover{
-		color : ${props => props.theme.colors.primaryGreen};
-	}
+const AvatarHolder = styled.div`
+    position: absolute;
+    margin: auto;
+    top: 40px;
+    right: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px #151515,
+                inset 0 0 0 5px #000000,
+                inset 0 0 0 5px #000000,
+                inset 0 0 0 5px #000000,
+                inset 0 0 0 5px #000000,;
+    background: white;
+    overflow: hidden;
+    animation: ${mvTop} 1.5s;
 `;	
-function UserCard() {
+
+const ProfilePicture = styled.img`
+	  width: 100%;
+      height: 100%;
+      object-fit: cover;
+`;
+
+const ProfileName = styled.div`
+	position: absolute;
+    margin: auto;
+    top: 15px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: inherit;
+    height: 40px;
+    text-align: center;
+    animation: ${fadeIn} 2s ease-in;
+	font-size : ${props => props.theme.fontSizes.medium};
+	a{
+	 color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+        &:hover {
+          text-decoration: underline;
+          color: ${props=>props.theme.colors.primaryGreen};
+      }
+	}
+	h6{	
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: -5px;
+      color: white;
+      width: 40px;
+ 
+	}
+`;
+
+const DsInfo = styled.div`
+    position: absolute;
+    margin: auto;
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: inherit;
+    height: 40px;
+    display: flex;
+	.ds {
+      &:nth-of-type(2) {
+        animation-delay: .5s;
+      }
+      &:nth-of-type(1) {
+        animation-delay: 1s;
+      }
+    }`;
+
+const Details = styled.div`
+      position: relative;
+      width: 33%;
+      text-align: center;
+      color: white;
+	  font-size : ${props => props.theme.fontSizes.medium};
+      animation: ${fadeInMove} 2s;
+      animation-fill-mode: forwards;
+      h6 {
+        text-transform: uppercase;
+		color: ${props=>props.theme.colors.primaryGreen};
+      }
+      p {
+        font-size: 1rem;
+      }
+	  &.followers{
+		p{
+			margin-top : 55px;
+		}
+	  }
+	`;
+
+
+
+
+function UserCard(props) {
+	const {user} = props;
 	return (
 		<Card>
-			<GameImage />
-			<UserName>test</UserName>
+			<DsTop/>
+			<AvatarHolder>
+				<ProfilePicture src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein"/>
+			</AvatarHolder>
+			<ProfileName>
+				<a href="" target="_blank" rel="noreferrer">testing</a>
+				<h6 title="Followers"><i className="fas fa-users"></i> <span className="followers">90</span></h6>
+			</ProfileName>
+			<DsInfo>
+				<Details className="ds">
+					<h6 title="Number of games wished by the user"> Wished Games <i className="fas fa-edit"></i></h6>
+					<p>29</p>
+				</Details>
+				<Details className="ds">
+					<h6 title="Number of games rated by the user"> Rated Games <i className="fas fa-project-diagram"></i></h6>
+					<p>0</p>
+				</Details>
+				<Details className="ds followers">
+					<h6 title="Number of followers"> Followers <i className="fas fa-comments"></i></h6>
+					<p>0</p>
+				</Details>
+			</DsInfo>
 		</Card>
 	);
 }
+
 
 export default UserCard;
