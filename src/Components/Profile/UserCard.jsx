@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { ref } from 'firebase/storage';
+import { getDownloadURL, ref } from 'firebase/storage';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -178,11 +178,27 @@ function UserCard(props) {
 		history.push(`/Users/${user.userName}`);
 	};
 
+	useEffect(() => {
+		if (user){
+			getDownloadURL(profileStorageRef)
+				.then((url) => {
+					setProfileUrl(url);
+					setProfileLoading(false);
+				})
+				.catch((error)=>{
+					console.log(error.message);
+					setProfileLoading(false);
+
+				});
+		}
+
+	},[user]);
+
 	return (
 		<Card>
 			<DsTop/>
 			<AvatarHolder>
-				<ProfilePicture src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein"/>
+				<ProfilePicture src={profileUrl} alt="Albert Einstein"/>
 			</AvatarHolder>
 			<ProfileName>
 				<a  onClick={redirectToProfile} rel="noreferrer">{user && user.userName}</a>
