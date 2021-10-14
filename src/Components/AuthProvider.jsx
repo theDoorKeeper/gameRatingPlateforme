@@ -31,6 +31,8 @@ export function AuthProvider({children}) {
 				followers : [],
 				following : [],
 				wishList : [],
+				profilePictureeUrl : '',
+				coverPictureeUrl : '',
 
 			});
 		} catch (error) {
