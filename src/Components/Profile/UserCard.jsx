@@ -35,7 +35,6 @@ const dsTopAnim = keyframes`
 `;
 
 const Card = styled.div`
-  position: absolute;
   width: 250px;
   height: 300px;
   border-radius: 10px;
@@ -45,11 +44,8 @@ const Card = styled.div`
 `;
 
 const DsTop = styled.img`
-    position: absolute;
+    position: relative;
     margin: auto;
-    top: 0;
-    right: 0;
-    left: 0;
     width: 300px;
     height: 80px;
     background: ${props=>props.theme.colors.primaryGreen};
@@ -57,19 +53,19 @@ const DsTop = styled.img`
 `;
 
 const AvatarHolder = styled.div`
-    position: absolute;
+    position: relative;
     margin: auto;
-    top: 40px;
+    top: -20px;
     right: 0;
     left: 0;
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    box-shadow: 0 0 0 5px #151515,
-                inset 0 0 0 5px #000000,
-                inset 0 0 0 5px #000000,
-                inset 0 0 0 5px #000000,
-                inset 0 0 0 5px #000000,;
+    box-shadow: 0 0 0 3px #151515,
+                inset 0 0 0 3px #000000,
+                inset 0 0 0 3px #000000,
+                inset 0 0 0 3px #000000,
+                inset 0 0 0 3px #000000;
     background: white;
     overflow: hidden;
     animation: ${mvTop} 1.5s;
@@ -82,12 +78,9 @@ const ProfilePicture = styled.img`
 `;
 
 const ProfileName = styled.div`
-	position: absolute;
+  	position: relative;
     margin: auto;
-    top: 15px;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    top: -15px;
     width: inherit;
     height: 40px;
     text-align: center;
@@ -104,25 +97,12 @@ const ProfileName = styled.div`
 		  cursor : pointer;
       }
 	}
-	h6{	
-      position: absolute;
-      margin: auto;
-      left: 0;
-      right: 0;
-      bottom: -5px;
-      color: white;
-      width: 40px;
- 
-	}
 `;
 
 const DsInfo = styled.div`
-    position: absolute;
+    position: relative;
+    top : -30px;
     margin: auto;
-    top: 50px;
-    bottom: 0;
-    right: 0;
-    left: 0;
     width: inherit;
     height: 40px;
     display: flex;
@@ -140,7 +120,6 @@ const Details = styled.div`
       width: 33%;
       text-align: center;
       color: white;
-	  font-size : ${props => props.theme.fontSizes.medium};
       animation: ${fadeInMove} 2s;
       animation-fill-mode: forwards;
       h6 {
@@ -150,11 +129,6 @@ const Details = styled.div`
       p {
         font-size: 1rem;
       }
-	  &.following{
-		p{
-			margin-top : 55px;
-		}
-	  }
 	`;
 
 
@@ -198,11 +172,10 @@ function UserCard(props) {
 		<Card>
 			<DsTop/>
 			<AvatarHolder>
-				<ProfilePicture src={profileUrl} alt="Albert Einstein"/>
+				<ProfilePicture src={profileUrl} alt="profile picture"/>
 			</AvatarHolder>
 			<ProfileName>
 				<a  onClick={redirectToProfile} rel="noreferrer">{user && user.userName}</a>
-				<h6 title="Followers"><i className="fas fa-users"></i> <span className="followers">{user && user.followers.length}</span></h6>
 			</ProfileName>
 			<DsInfo>
 				<Details className="ds">
