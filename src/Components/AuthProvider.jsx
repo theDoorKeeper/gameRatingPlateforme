@@ -2,7 +2,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import {auth, db} from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut} from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 
 
 const AuthContext = React.createContext();
@@ -31,9 +31,7 @@ export function AuthProvider({children}) {
 				followers : [],
 				following : [],
 				wishList : [],
-				profilePictureeUrl : '',
-				coverPictureeUrl : '',
-
+				creationDate : serverTimestamp()
 			});
 		} catch (error) {
 			const errorMessage = error.message;
