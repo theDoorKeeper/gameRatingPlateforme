@@ -99,6 +99,7 @@ const ProfileName = styled.div`
         &:hover {
           text-decoration: underline;
           color: ${props=>props.theme.colors.primaryGreen};
+		  cursor : pointer;
       }
 	}
 	h6{	
@@ -161,8 +162,11 @@ function UserCard(props) {
 	const {user} = props;
 	const history = useHistory();
 
-	const redirectToProfile = ()=>{
-		history.go(`/Users/${user.userName}`);
+	const redirectToProfile = async ()=>{
+		//history push wouldnt work to change Users but it did to go back to the main screen so i made it async and added the await keyword to first 
+		//go to the mainscreen then go to the user 
+		await history.push('/');
+		history.push(`/Users/${user.userName}`);
 	};
 
 	return (
