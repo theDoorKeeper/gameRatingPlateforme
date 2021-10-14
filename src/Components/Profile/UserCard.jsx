@@ -147,7 +147,7 @@ const Details = styled.div`
       p {
         font-size: 1rem;
       }
-	  &.followers{
+	  &.following{
 		p{
 			margin-top : 55px;
 		}
@@ -166,21 +166,21 @@ function UserCard(props) {
 				<ProfilePicture src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein"/>
 			</AvatarHolder>
 			<ProfileName>
-				<a href="" target="_blank" rel="noreferrer">testing</a>
-				<h6 title="Followers"><i className="fas fa-users"></i> <span className="followers">90</span></h6>
+				<a href={`http://localhost:3000/Users/${user.userName}`} rel="noreferrer">{user && user.userName}</a>
+				<h6 title="Followers"><i className="fas fa-users"></i> <span className="followers">{user && user.followers.length}</span></h6>
 			</ProfileName>
 			<DsInfo>
 				<Details className="ds">
 					<h6 title="Number of games wished by the user"> Wished Games <i className="fas fa-edit"></i></h6>
-					<p>29</p>
+					<p>{user && user.wishList.length}</p>
 				</Details>
 				<Details className="ds">
 					<h6 title="Number of games rated by the user"> Rated Games <i className="fas fa-project-diagram"></i></h6>
-					<p>0</p>
+					<p>{user && user.ratings.length}</p>
 				</Details>
-				<Details className="ds followers">
-					<h6 title="Number of followers"> Followers <i className="fas fa-comments"></i></h6>
-					<p>0</p>
+				<Details className="ds following">
+					<h6 title="Number of Following"> Following <i className="fas fa-comments"></i></h6>
+					<p>{user && user.following.length}</p>
 				</Details>
 			</DsInfo>
 		</Card>
