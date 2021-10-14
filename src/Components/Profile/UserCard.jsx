@@ -159,6 +159,12 @@ const Details = styled.div`
 
 function UserCard(props) {
 	const {user} = props;
+	const history = useHistory();
+
+	const redirectToProfile = ()=>{
+		history.go(`/Users/${user.userName}`);
+	};
+
 	return (
 		<Card>
 			<DsTop/>
@@ -166,7 +172,7 @@ function UserCard(props) {
 				<ProfilePicture src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1820405/profile/profile-512.jpg?1533058950" alt="Albert Einstein"/>
 			</AvatarHolder>
 			<ProfileName>
-				<a href={`http://localhost:3000/Users/${user.userName}`} rel="noreferrer">{user && user.userName}</a>
+				<a  onClick={redirectToProfile} rel="noreferrer">{user && user.userName}</a>
 				<h6 title="Followers"><i className="fas fa-users"></i> <span className="followers">{user && user.followers.length}</span></h6>
 			</ProfileName>
 			<DsInfo>
