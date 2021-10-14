@@ -49,8 +49,7 @@ function UserList(props) {
 	}, [list]);
 
 	useEffect(() => {
-		console.log(userArray);
-		setArray( userArray.map( user => <UserCard  title={user.name} image={user.picture} key={user.uid} /> ) );
+		setArray( userArray.map( user => <UserCard  user={user} key={user.uid} /> ) );
 	}, [userArray]);
 
 	return (
