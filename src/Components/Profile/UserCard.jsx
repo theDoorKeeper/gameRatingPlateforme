@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { ref } from 'firebase/storage';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import { storage } from '../../firebase';
 
 const fadeInMove = keyframes`
   0% {
@@ -162,6 +164,10 @@ function UserCard(props) {
 	const {user} = props;
 	const history = useHistory();
 
+	const profileStorageRef = ref(storage, `${user.uid}/Profile.jpg`);
+	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
+
+  
 	const redirectToProfile = async ()=>{
 		//history push wouldnt work to change Users but it did to go back to the main screen so i made it async and added the await keyword to first 
 		//go to the mainscreen then go to the user 
