@@ -163,7 +163,9 @@ const Details = styled.div`
 function UserCard(props) {
 	const {user} = props;
 	const history = useHistory();
-
+	const [profileUrl, setProfileUrl] = useState(null);
+	const [coverUrl, setCoverUrl] = useState(null);
+  
 	const profileStorageRef = ref(storage, `${user.uid}/Profile.jpg`);
 	const coverStorageRef = ref(storage, `${user.uid}/Cover.jpg`);
 
