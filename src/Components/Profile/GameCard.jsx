@@ -38,7 +38,7 @@ const GameInfo = styled.div`
 	}
 `;	
 function GameCard(props) {
-	const {image, title, rating} = props;
+	const {image, title, rating, slug} = props;
 	let history = useHistory();
 	const [ratingState, setRatingState] = useState('');
 	
@@ -51,7 +51,7 @@ function GameCard(props) {
 	}, [rating]);
 
 	const gotoGamepage = ()=>{
-		history.push(`/Game/${title.split(' ').join('-')}`);
+		history.push(`/Game/${slug}`);
 	};
 	
 

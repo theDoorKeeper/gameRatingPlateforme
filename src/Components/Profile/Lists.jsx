@@ -24,7 +24,7 @@ function Lists(props) {
 	const [gameArray, setgameArray] = useState([]);
 
 	useEffect(() => {
-		list &&  setgameArray( list.map( game => <GameCard  title={game.name} image={game.picture} rating={game.liked} key={game.name} /> ) );
+		list &&  setgameArray( list.map( game => <GameCard  title={game.name} slug={game.slug} image={game.picture} rating={game.liked} key={game.name} /> ) );
 	}, [list]);
 
 	return (
