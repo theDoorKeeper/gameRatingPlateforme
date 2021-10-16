@@ -34,7 +34,8 @@ const TypeButton = styled.button`
 
 function GameHub() {
 	const [genre, setGenre] = useState('');
-	
+	const [gameList, setGameList] = useState([]);
+
 	return (
 		<Container>
 			<TypesContainer>
