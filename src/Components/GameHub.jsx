@@ -36,7 +36,8 @@ const TypeButton = styled.button`
 function GameHub() {
 	const [genre, setGenre] = useState('');
 	const [gameList, setGameList] = useState([]);
-
+	const [listDisplay, setListDisplay] = useState([]);
+	
 
 	const getGenre = (e)=>{
 		setGenre(e.target.textContent);
