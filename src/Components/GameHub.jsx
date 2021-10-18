@@ -4,6 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import Lists from './Profile/Lists';
 
 const Container = styled.div`
     width:100%;
@@ -36,8 +37,7 @@ const TypeButton = styled.button`
 function GameHub() {
 	const [genre, setGenre] = useState('');
 	const [gameList, setGameList] = useState([]);
-	const [listDisplay, setListDisplay] = useState([]);
-	
+
 
 	const getGenre = (e)=>{
 		setGenre(e.target.textContent);
@@ -70,7 +70,6 @@ function GameHub() {
 
 		queryGame();
 	}, [genre]);
-    
 
 	return (
 		<Container>
@@ -79,7 +78,9 @@ function GameHub() {
 				<TypeButton onClick={getGenre}>fps</TypeButton>
 				<TypeButton>simulation</TypeButton>
 			</TypesContainer>
-			<GameListContainer/>
+			<GameListContainer>
+				<Lists list={gameList}/>
+			</GameListContainer>
 		</Container>
 	);
 }
