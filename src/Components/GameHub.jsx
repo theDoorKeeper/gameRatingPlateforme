@@ -7,9 +7,12 @@ import styled from 'styled-components';
 import Lists from './Profile/Lists';
 
 const Container = styled.div`
-    width:100%;
+	padding : 2rem;
+	margin : auto;
+    width:90%;
     display:flex;
     padding : 15px;
+	background-color : ${props => props.theme.colors.lightGray};
 `;
 
 const GameListContainer = styled.div`
@@ -20,17 +23,40 @@ const GameListContainer = styled.div`
 
 
 const TypesContainer = styled.div`
+	padding-top : 2rem;
     width : 30%;
     display : flex;
     flex-direction : column;
-    gap : 10px;
+    gap : 20px;
 `;
 
 const TypeButton = styled.button`
-    width : 80%;
-    height : 3rem;
-    border-radius : 30px;
+    width : 90%;
+    height : 8rem;
+    border-radius : 8px;
     border : none ;
+	color : whitesmoke;
+	background-color :  ${props => props.theme.colors.grey};
+	font-size : ${props=>props.theme.fontSizes.large};
+	text-decoration: none;
+	text-transform: uppercase;
+	border: 0 solid;
+	box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+	outline: 1px solid;
+	outline-color: rgba(255, 255, 255, .5);
+	outline-offset: 0px;
+	text-shadow: none;
+  	transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+	cursor : pointer;
+	&:hover{
+		color : ${props => props.theme.colors.primaryGreen};
+		background-color : ${props => props.theme.colors.grey};
+		border: 1px solid;
+	box-shadow: inset 0 0 20px ${props => props.theme.colors.primaryGreen}, 0 0 20px rgba(255, 255, 255, .2);
+	outline-color: rgba(255, 255, 255, 0);
+	outline-offset: 15px;
+	text-shadow: 1px 1px 2px #427388; 
+	}
 `;
 
 
@@ -75,8 +101,13 @@ function GameHub() {
 		<Container>
 			<TypesContainer>
 				<TypeButton onClick={getGenre}>action</TypeButton>
-				<TypeButton onClick={getGenre}>fps</TypeButton>
-				<TypeButton>simulation</TypeButton>
+				<TypeButton onClick={getGenre}>strategy</TypeButton>
+				<TypeButton onClick={getGenre}>role-playing-games-rpg</TypeButton>
+				<TypeButton onClick={getGenre}>shooter</TypeButton>
+				<TypeButton onClick={getGenre}>adventure</TypeButton>
+				<TypeButton onClick={getGenre}>puzzle</TypeButton>
+				<TypeButton onClick={getGenre}>racing</TypeButton>
+				<TypeButton onClick={getGenre}>sports</TypeButton>
 			</TypesContainer>
 			<GameListContainer>
 				<Lists list={gameList}/>
