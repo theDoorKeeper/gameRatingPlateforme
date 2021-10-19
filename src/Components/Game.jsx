@@ -251,6 +251,10 @@ function Game() {
 
 				querySnapshot.forEach((doc) => {
 					let wished = false;
+					// in case the user has no items in his wishList
+					if(doc.data().wishList.length === 0){
+						setHasWishedGame(false);
+					}
 					doc.data().wishList.forEach((game) => {
 						if ( gameData && game.name === gameData.name) {
 							setHasWishedGame(true);
