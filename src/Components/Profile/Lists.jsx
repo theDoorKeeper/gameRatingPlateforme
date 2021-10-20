@@ -13,18 +13,13 @@ const WishedWrapper = styled.div`
 	flex-wrap : wrap;
 	justify-content : center; 
 `;
-const Title = styled.div`
-	font-size : ${props => props.theme.fontSizes.large};
-	color : ${props => props.theme.colors.white};
-	max-width : fit-content;
-	margin : auto;
-`;
+
 function Lists(props) {
 	const {list} = props;
 	const [gameArray, setgameArray] = useState([]);
 
 	useEffect(() => {
-		list &&  setgameArray( list.map( game => <GameCard  title={game.name} slug={game.slug} image={game.picture} rating={game.liked} key={game.name} /> ) );
+		list &&  setgameArray( list.map( game => <GameCard  title={game.name} slug={game.slug} image={game.picture || game.background_image} rating={game.liked} key={game.name} /> ) );
 	}, [list]);
 
 	return (
