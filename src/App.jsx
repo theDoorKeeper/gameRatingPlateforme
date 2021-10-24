@@ -17,6 +17,7 @@ import Game from './Components/Game';
 import User from './Components/User';
 import { collection, getDocs, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from './firebase';
+import GameHub from './Components/GameHub';
 
 function App() {
 	const [loginOverlay, setloginOverlay] = useState(false);
@@ -72,15 +73,18 @@ function App() {
 					<Header setloginOverlay={setloginOverlay}/>			
 					<Switch>
 						<Route exact path="/">
-							<Details/>
+							<Details user={userData}/>
 							{!currentUser ? <> <LoginPage overlayState={loginOverlay} setOverlayState={setloginOverlay} setSingUpOverlay={setSingUpOverlay}/>
 								<SignUpPage overlayState={singUpOverlay} setOverlayState={setSingUpOverlay} setloginOverlay={setloginOverlay}/> </> : null}
 						</Route>
 						<PrivateRoute  path="/Profile" >
 							<Profile userData={userData} loading={loading}/>
 						</PrivateRoute>
-						<Route path="/Game/:name">
+						<Route exact path="/Game/:name">
 							<Game/>
+						</Route>
+						<Route exact path="/Hub">
+							<GameHub/>
 						</Route>
 						<Route path="/Users/:name">
 							<User/>
