@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import backgroundImg from '../assets/gameBackground.png';
 const BackGround = styled.div`
@@ -46,7 +47,10 @@ const Description = styled.div`
 
 `;
 
-function Details() {
+function Details(props) {   
+	const {user} = props;
+    
+
 	return (
 		<>
 			<BackGround/>
