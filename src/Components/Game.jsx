@@ -175,10 +175,10 @@ function Game() {
 			setRateLoading(true);
 			// doc.data() is never undefined for query doc snapshots
 			updateDoc(doc.ref, {
-				ratings: arrayRemove({ name: gameData.name, liked: !rating, picture : gameData.background_image }),
+				ratings: arrayRemove({ name: gameData.name, liked: !rating, picture : gameData.background_image , slug: gameData.slug }),
 			});
 			updateDoc(doc.ref, {
-				ratings: arrayUnion({ name: gameData.name, liked: rating, picture : gameData.background_image }),
+				ratings: arrayUnion({ name: gameData.name, liked: rating, picture : gameData.background_image , slug: gameData.slug }),
 			});
 		});
 		setRateLoading(false);
@@ -206,11 +206,11 @@ function Game() {
 			doc.data().wishList.forEach((game) => {
 				if (game.name === gameData.name) {
 					updateDoc(doc.ref, {
-						wishList: arrayRemove({ name: gameData.name, picture : gameData.background_image }),
+						wishList: arrayRemove({ name: gameData.name, picture : gameData.background_image, slug: gameData.slug }),
 					});
 				} else {
 					updateDoc(doc.ref, {
-						wishList: arrayUnion({ name: gameData.name, picture : gameData.background_image }),
+						wishList: arrayUnion({ name: gameData.name, picture : gameData.background_image, slug: gameData.slug }),
 					});
 				}
 			});
